@@ -1,0 +1,158 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation Guide &mdash; Spontaneous CMS 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Spontaneous CMS 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="Create Your First Spontaneous Site" href="tutorial.html" />
+    <link rel="prev" title="Getting Started" href="getting-started.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tutorial.html" title="Create Your First Spontaneous Site"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Spontaneous CMS 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation-guide">
+<span id="installation"></span><h1>Installation Guide<a class="headerlink" href="#installation-guide" title="Permalink to this headline">¶</a></h1>
+<p>This guide will walk you through installing Spontaneous and the software that
+it requires.</p>
+<p>Spontaneous is a Ruby program so first we&#8217;ll need to <a class="reference internal" href="#install-ruby"><em>Installing Ruby</em></a>.</p>
+<div class="section" id="installing-ruby">
+<span id="install-ruby"></span><h2>Installing Ruby<a class="headerlink" href="#installing-ruby" title="Permalink to this headline">¶</a></h2>
+<p>Install RVM:</p>
+<div class="highlight-ruby"><pre>$ rvm install 1.9.3</pre>
+</div>
+</div>
+<div class="section" id="installing-spontaneous">
+<h2>Installing Spontaneous<a class="headerlink" href="#installing-spontaneous" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gem install spontaneous
+</pre></div>
+</div>
+<p>This installs the Spontaneous library files (and their dependencies) as well as
+the executable <tt class="docutils literal"><span class="pre">spot</span></tt>.</p>
+</div>
+<div class="section" id="installing-a-database">
+<h2>Installing a Database<a class="headerlink" href="#installing-a-database" title="Permalink to this headline">¶</a></h2>
+<p>Spontaneous is tested &amp; works with MySQL 5+ and PostgreSQL 9+ and is currently
+completely agnostic about the choice.</p>
+<p>This may change in a later version however with the way that PostgreSQL is
+developing (with native JSON and hash support).</p>
+<p>On MacOS X we recommend you use <a class="reference external" href="http://mxcl.github.com/homebrew/">homebrew</a>
+to install either of these.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>brew install postgresql
+<span class="c"># or</span>
+<span class="nv">$ </span>brew install mysql
+</pre></div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<span id="installation-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>Has something gone wrong?</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation Guide</a><ul>
+<li><a class="reference internal" href="#installing-ruby">Installing Ruby</a></li>
+<li><a class="reference internal" href="#installing-spontaneous">Installing Spontaneous</a></li>
+<li><a class="reference internal" href="#installing-a-database">Installing a Database</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting-started.html"
+                        title="previous chapter">Getting Started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial.html"
+                        title="next chapter">Create Your First Spontaneous Site</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/installation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tutorial.html" title="Create Your First Spontaneous Site"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="index.html">Spontaneous CMS 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Garry Hill.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

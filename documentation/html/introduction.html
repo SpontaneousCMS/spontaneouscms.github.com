@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Spontaneous CMS 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Spontaneous CMS 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="Getting Started" href="getting-started.html" />
+    <link rel="prev" title="Welcome to Spontaneous CMS’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting Started"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Spontaneous CMS’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Spontaneous CMS 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Spontaneous takes the traditional idea of an online content management system
+and brings it leaping into the future.</p>
+<p>In this future your content is not constrained into one-dimensional streams of
+identical content items but is instead a richly structured hierarchy of
+information. Instead of constraining you within a pre-determined model of the
+way your site is constructed, Spontaneous allows you to create, maintain and
+extend your own customised set of relationships and hierarchies.</p>
+<p>That is not to say that it&#8217;s complex or difficult to use. Completely the
+opposite is true in fact. Because your information is structured in the way that
+you understand, things live where you expect them to live and there is usually
+a very direct relationship between the content you enter into the CMS interface
+and the content of the final rendered HTML page.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>&#8220;Content&#8221;</strong>. We all hate the term. It demeans all the effort you put into
+crafting a beautiful website that tells what you hope is a fascinating story.
+But for the purpose of this documentation it really is the most
+straight-forward and direct way of describing the mixed bag of text, images,
+videos, links etc. that go to make up a website. So, sorry now let&#8217;s move on...</p>
+</div>
+<div class="section" id="how-spontaneous-works">
+<h2>How Spontaneous Works<a class="headerlink" href="#how-spontaneous-works" title="Permalink to this headline">¶</a></h2>
+<p>Building a Spontaneous site is best started by getting a really good feel for
+the basic building blocks of your site.</p>
+<p>Spontaneous breaks content down into &#8220;types&#8221;. Each content type has at least a
+name and a set of zero or more &#8220;fields&#8221;.</p>
+<p>These types are defined within a site &#8220;schema&#8221; which is a set of Ruby source
+files.</p>
+<p>If you are building a blog site for example then your basic unit is a blog
+&#8220;post&#8221;. This post will need to have at least a title, a short synopsis, perhaps
+a representative image and then an area where you can add in the body of the
+post. This post body will be a mixed bag of hyper-text, images and videos.</p>
+<p>To represent this &#8220;post&#8221; in Spontaneous&#8217;s type system you would need the
+following code:</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/blog.rb</span>
+
+<span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">Page</span>
+  <span class="n">field</span> <span class="ss">:title</span>
+  <span class="n">field</span> <span class="ss">:synopsis</span>
+  <span class="n">field</span> <span class="ss">:image</span>
+
+  <span class="n">box</span> <span class="ss">:body</span> <span class="k">do</span>
+    <span class="n">allow</span> <span class="ss">:Image</span>
+    <span class="n">allow</span> <span class="ss">:Text</span>
+    <span class="n">allow</span> <span class="ss">:Video</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Image</span> <span class="o">&lt;</span> <span class="no">Piece</span>
+  <span class="n">field</span> <span class="ss">:image</span>
+  <span class="n">field</span> <span class="ss">:alt</span><span class="p">,</span> <span class="ss">:string</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Text</span> <span class="o">&lt;</span> <span class="no">Piece</span>
+  <span class="n">field</span> <span class="ss">:text</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Video</span> <span class="o">&lt;</span> <span class="no">Piece</span>
+  <span class="n">field</span> <span class="ss">:video</span><span class="p">,</span> <span class="ss">:webvideo</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>If your site&#8217;s homepage is just a list of your blog posts then you would
+represent it like this:</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/homepage.rb</span>
+
+<span class="k">class</span> <span class="nc">Homepage</span> <span class="o">&lt;</span> <span class="no">Page</span>
+  <span class="n">box</span> <span class="ss">:posts</span> <span class="k">do</span>
+    <span class="n">allow</span> <span class="ss">:Post</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>This is the complete Ruby schema of a working blog site.</p>
+<p>Obviously real-world examples will most likely be more complicated than this,
+involving many more types and fields, but the basic building blocks are exactly
+as above.</p>
+<p>In order to turn this schema into a web-page you need two more things: some
+blog posts and a set of HTML templates that will convert the posts into a
+webpage. If you want to see how that works then dive into the <a class="reference internal" href="tutorial.html#tutorial"><em>Create Your First Spontaneous Site</em></a>
+which will guide you through installation and show you how to convert a basic
+schema into a real webpage.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#how-spontaneous-works">How Spontaneous Works</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Spontaneous CMS&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="getting-started.html"
+                        title="next chapter">Getting Started</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/introduction.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting Started"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Spontaneous CMS’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Spontaneous CMS 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Garry Hill.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
