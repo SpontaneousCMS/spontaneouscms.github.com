@@ -14,9 +14,9 @@ Contents:
    :maxdepth: 2
 
    introduction
-   getting-started
    installation
    tutorial
+   getting-started
    content-model
    media
    schema

@@ -20,7 +20,7 @@ Working with the UI
 Generating Multiple Image Sizes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hosing your Media on an External Server
----------------------------------------
+Hosting your Media on an External Server
+----------------------------------------
 
 Integration with Amazon S3 through Fog.

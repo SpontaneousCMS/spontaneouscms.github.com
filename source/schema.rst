@@ -10,3 +10,4 @@ The Schema
    schema/pieces
    schema/fields
    schema/aliases
+   schema/inheritance
