@@ -109,10 +109,10 @@ list of recipes and a set of recipe pages that have:</p>
 page we need to add a <tt class="docutils literal"><span class="pre">Recipe</span></tt> content type and then define the various fields
 and boxes that are needed in order to build our final recipe page.</p>
 <p>First we create a file in the <tt class="docutils literal"><span class="pre">schema</span></tt> directory called <tt class="docutils literal"><span class="pre">recipe.rb</span></tt>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># schema/recipe.rb</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
-class Recipe &lt; Page
-end
+<span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>The line beginning with <tt class="docutils literal"><span class="pre">class</span></tt> is where we define our content type. In this
@@ -124,17 +124,17 @@ from Page&#8221;.</p>
 <h3>Defining Editable Fields<a class="headerlink" href="#defining-editable-fields" title="Permalink to this headline">¶</a></h3>
 <p>So now we have a page type called &#8220;Recipe&#8221;. Now we need to define the editable
 fields that each recipe needs (title, description and photo):</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># schema/recipe.rb</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
-class Recipe &lt; Page
-  field :description, :text
-  field :photo,       :image
-end
+<span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:photo</span><span class="p">,</span>       <span class="ss">:image</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>Fields are defined by adding a call to the <tt class="docutils literal"><span class="pre">field</span></tt> directive within the body
 of the content type definition. The syntax is:</p>
-<div class="highlight-bash"><div class="highlight"><pre>field :&lt;field_name&gt;, :&lt;field_type&gt;, <span class="o">[</span>options...<span class="o">]</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">field_name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">field_type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">[</span><span class="n">options</span><span class="o">.</span><span class="n">.</span><span class="o">.]</span>
 </pre></div>
 </div>
 <p><tt class="docutils literal"><span class="pre">field_name</span></tt> is what you&#8217;ll use to refer to the value of the field within your
@@ -142,7 +142,7 @@ templates (see later) and also the name that will show up in the editing
 interface.</p>
 <p>If you wanted to use a different name for the field in the user interface, you
 would pass a value for <tt class="docutils literal"><span class="pre">title</span></tt> in the field options:</p>
-<div class="highlight-bash"><div class="highlight"><pre>field :description, :text, title: <span class="s2">&quot;A short description&quot;</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;A short description&quot;</span>
 </pre></div>
 </div>
 <p>This would change the name of the field in the user interface to &#8220;A short
@@ -154,8 +154,8 @@ types are <tt class="docutils literal"><span class="pre">:string</span></tt>, <t
 useful for titles and any other bit of text that you want to appear as unstyled.
 <tt class="docutils literal"><span class="pre">string</span></tt> is the default type, so if you want to create a string field you can
 skip the type parameter:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># defaults to a ``string`` field</span>
-field :name
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># defaults to a ``string`` field</span>
+<span class="n">field</span> <span class="ss">:name</span>
 </pre></div>
 </div>
 <p><strong>Text</strong> fields allow for the entry of rich text. These are useful for body text
@@ -179,27 +179,27 @@ image. For more information see <a class="reference internal" href="schema/field
 <p>One useful shortcut when defining fields is that if no field type is given then
 it will first try to find a field type based on the name of the field. So, for
 example:</p>
-<div class="highlight-bash"><div class="highlight"><pre>field :image
-<span class="c"># is exactly the same as</span>
-field :image, :image
+<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:image</span>
+<span class="c1"># is exactly the same as</span>
+<span class="n">field</span> <span class="ss">:image</span><span class="p">,</span> <span class="ss">:image</span>
 </pre></div>
 </div>
 <p>Each field type also has some useful aliases, for example image fields can be
 referred to as <tt class="docutils literal"><span class="pre">photo</span></tt> fields:</p>
-<div class="highlight-bash"><div class="highlight"><pre>field :photo
-<span class="c"># is the same as</span>
-field :photo, :photo
-<span class="c"># which is the same as</span>
-field :photo, :image
+<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:photo</span>
+<span class="c1"># is the same as</span>
+<span class="n">field</span> <span class="ss">:photo</span><span class="p">,</span> <span class="ss">:photo</span>
+<span class="c1"># which is the same as</span>
+<span class="n">field</span> <span class="ss">:photo</span><span class="p">,</span> <span class="ss">:image</span>
 </pre></div>
 </div>
 <p>So our Recipe page definition could also have been written like this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># schema/recipe.rb</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
-class Recipe &lt; Page
-  field :description, :text
-  field :photo
-end
+<span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:photo</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <div class="section" id="where-s-the-title">
@@ -210,9 +210,9 @@ defined. How come?</p>
 <p>The secret is in the <tt class="docutils literal"><span class="pre">Page</span></tt> content type that <tt class="docutils literal"><span class="pre">Recipe</span></tt> inherits from. This
 <tt class="docutils literal"><span class="pre">Page</span></tt> type is defined in the <tt class="docutils literal"><span class="pre">schema/page.rb</span></tt> file that Spontaneous will
 have generated for you. It will look something like this:</p>
-<div class="highlight-bash"><div class="highlight"><pre>class Page &lt; Spontaneous::Page
-  field :title, :string, :default <span class="o">=</span>&gt; <span class="s2">&quot;New Page&quot;</span>
-end
+<div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Page</span> <span class="o">&lt;</span> <span class="no">Spontaneous</span><span class="o">::</span><span class="no">Page</span>
+  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s2">&quot;New Page&quot;</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>Because our <tt class="docutils literal"><span class="pre">Recipe</span></tt> type is inheriting from this <tt class="docutils literal"><span class="pre">Page</span></tt> class we also
@@ -231,15 +231,15 @@ this case we&#8217;re specifying that each new page should be called &#8220;New 
 <p>Hmm, &#8220;New Page&#8221; isn&#8217;t very good for new recipes, so what we can do is
 re-define the title field inside our Recipe class and change this default value
 to something more appropriate:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># schema/recipe.rb</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
-class Recipe &lt; Page
-  <span class="c"># we can drop the type for the `title` field</span>
-  <span class="c"># because the default is :string</span>
-  field :title,       default: <span class="s2">&quot;New Recipe&quot;</span>
-  field :description, :text
-  field :photo
-end
+<span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
+  <span class="c1"># we can drop the type for the `title` field</span>
+  <span class="c1"># because the default is :string</span>
+  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="n">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:photo</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>For more details on defining fields see <a class="reference internal" href="schema/fields.html#schema-fields"><em>Fields</em></a>.</p>
@@ -262,19 +262,19 @@ same ability to have fields (and boxes) and are defined in almost exactly the
 same way.</p>
 <p>So, let&#8217;s create an &#8220;Ingredients&#8221; box that will hold our list of ingredients. We
 do this within our <tt class="docutils literal"><span class="pre">schema/recipe.rb</span></tt> file as before:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># schema/recipe.rb</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
-class Recipe &lt; Page
-  <span class="c"># we can drop the type for the `title` field</span>
-  <span class="c"># because the default is :string</span>
-  field :title,       default: <span class="s2">&quot;New Recipe&quot;</span>
-  field :description, :text
-  field :photo
+<span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
+  <span class="c1"># we can drop the type for the `title` field</span>
+  <span class="c1"># because the default is :string</span>
+  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="n">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:photo</span>
 
-  box :ingredients <span class="k">do</span>
-<span class="k">    </span>allow :Ingredient
-  end
-end
+  <span class="n">box</span> <span class="ss">:ingredients</span> <span class="k">do</span>
+    <span class="n">allow</span> <span class="ss">:Ingredient</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>This adds the ingredients box and specifies that we want to allow the user to

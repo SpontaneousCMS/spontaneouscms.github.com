@@ -49,6 +49,8 @@ necessary databases and database tables::
 
 .. todo:: Look at spot init and include login parameters
 
+.. highlight:: ruby
+
 Create Your Schema
 ------------------
 
