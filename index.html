@@ -6,8 +6,13 @@
 		<link href="http://fonts.googleapis.com/css?family=News+Cycle:400,700" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="splash.css" />
 		<link rel="stylesheet" href="gist.css" />
-		<script type="text/javascript" src="js/FancyZoom.js"></script>
-		<script type="text/javascript" src="js/FancyZoomHTML.js"></script>
+		<script type="text/javascript">
+			var _gaq = [['_setAccount', 'UA-37900566-1'], ['_trackPageview']];
+			(function(d, s) {
+				var t=d.getElementsByTagName(s)[0],g=d.createElement(s);g.async=1;g.src='//www.google-analytics.com/ga.js';t.parentNode.insertBefore(g,t);
+			})(document, "script");
+		</script>
+
 	</head>
 	<body onload="setupZoom()">
 		<div id="contents">
@@ -305,5 +310,7 @@
 			<p>If you’d like to contribute to Spontaneous’s development then head over to the <a href="https://github.com/SpontaneousCMS/spontaneous">Github page</a>. Spontaneous is currently the work of a <a href="https://github.com/SpontaneousCMS/spontaneous/graphs/contributors">single developer</a>. Any help greatly appreciated.</p>
 			</div>
 			<a href="https://github.com/SpontaneousCMS/spontaneous"><img style="position: absolute; top: 0; right: 0; border: 0;" src="forkme_right_white_FF6C03.png" alt="Fork me on GitHub"></a>
+		<script type="text/javascript" src="js/FancyZoom.js" async></script>
+		<script type="text/javascript" src="js/FancyZoomHTML.js" async></script>
 		</body>
 	</html>
