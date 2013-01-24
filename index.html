@@ -9,7 +9,7 @@
 		<script type="text/javascript">
 			var h=window.location.host;
 			if (h && h !== "localhost" && h !== "127.0.0.1") {
-				var _gaq=[['_setAccount','UA-37900566-1'],['_trackPageview']];
+				var _gaq=[['_setAccount',’UA-37900566-1'],['_trackPageview']];
 				(function(d, s) {
 					var t=d.getElementsByTagName(s)[0],g=d.createElement(s);g.async=1;g.src='//www.google-analytics.com/ga.js';t.parentNode.insertBefore(g,t);
 				})(document, "script");
@@ -20,11 +20,11 @@
 	<body onload="setupZoom()">
 		<div id="contents">
 			<div id="logo"></div>
-			<div id="strap">The next generation online content management system.</div>
+			<div id="strap">The next-generation online content management system.</div>
 
 
 			<div class="hero">
-				<p>Spontaneous is an <strong>open-source</strong> content management system written in <strong>Ruby</strong> that has two main goals:</p>
+				<p>Spontaneous is an <strong>open-source</strong> content management framework written in <strong>Ruby</strong> that has two main goals:</p>
 				<ul>
 					<li>To provide a <strong>powerful</strong> and flexible API to developers that will allow them to create <strong>richer, more beautiful</strong> websites, and </li>
 					<li>Give site editors a <strong>intuitive and responsive editing interface</strong> and workflow that will free them to concentrate on what they’re trying to say, not the tools they’re using to say it.</li>
@@ -173,7 +173,7 @@
 						<p>The separate publishing step transforms your changes into static pages<sup>*</sup> and indexes the site. This is run in the background using a low-priority process so that it doesn’t affect the performance of the site but you recieve progress updates in real time.</p>
 
 						<p>
-						<sup>*</sup> If possible…
+						<sup>*</sup> Unless they contain some dynamic component.
 						</p>
 					</div>
 					<div class="clear"></div>
@@ -260,12 +260,12 @@
 				<strong>Host your media in the cloud.</strong> Spontaneous uses <a href="http://fog.io">Fog</a> to integrate with cloud services.
 				</li>
 				<li>
-				<strong>DRY templates using inheritance.</strong> Spontaneous has its <a href="https://docs.djangoproject.com/en/dev/topics/templates/">own template engine</a> that supports template inheritance <a href="https://docs.djangoproject.com/en/dev/topics/templates/">á la Django</a>. It also allows you to write two-pass templates, or templates that generate templates if you will.
-				</li>
+				<strong>DRY templates using inheritance.</strong> Spontaneous has its <a href="https://docs.djangoproject.com/en/dev/topics/templates/">own template engine</a> that supports template inheritance <a href="https://docs.djangoproject.com/en/dev/topics/templates/">á la Django</a>. It also allows you to write two-pass templates, or templates that generate templates if you will, which are rendered dynamically.
 				<li><strong>Search engine friendly by design.</strong> Page URLs are 100% hand crafted, there are no human-opaque IDs or parameters to hide or work around.</li>
+				</li>
 			</ul>
 
-			<p>This is just the start. Spontaneous is in active development and has a long list of features that are still on the drawing board. </p>
+			<p>This is just the start. The system is in active development with a plan for exciting features that’s already a mile long. However the aim is not for a constantly moving set of features but instead concentrate on honing and refining the core with an eye to making the developer’s life simpler and the system more robust. The goal is for extensions and customisations to be made available through external plugins interfacing with a clear and well-documented API.</p>
 
 			<h3>In Production</h3>
 
