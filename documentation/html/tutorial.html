@@ -84,10 +84,15 @@ necessary databases and database tables:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>spot init
 </pre></div>
 </div>
+<p>As part of the initialization you will be asked for some details in order to
+create a root-level user for the site. If possible details will be taken
+from your git config (name &amp; email address).</p>
+<p>Spontaneous has a useful &#8220;auto login&#8221; feature in development mode which will be
+configured to use this root account.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This requires administrator access to your database in order to do its work. It
-should hopefully work out of the box but you may need to pass in extra
+<p class="last">This requires administrator access to your database in order to do its work.
+It should hopefully work out of the box but you may need to pass in extra
 authenticaion parameters in order to correctly access the database.</p>
 </div>
 </div>
@@ -105,21 +110,98 @@ list of recipes and a set of recipe pages that have:</p>
 <li>A list of ingredients,</li>
 <li>A set of instructions (each instruction with an optional photo)</li>
 </ul>
-<p>Let&#8217;s start with the recipe pages. To define the content structure of a recipe
-page we need to add a <tt class="docutils literal"><span class="pre">Recipe</span></tt> content type and then define the various fields
-and boxes that are needed in order to build our final recipe page.</p>
-<p>First we create a file in the <tt class="docutils literal"><span class="pre">schema</span></tt> directory called <tt class="docutils literal"><span class="pre">recipe.rb</span></tt>:</p>
+<p>Our first step will be to set up our homepage.</p>
+<div class="section" id="add-a-site-homepage">
+<h3>Add a Site Homepage<a class="headerlink" href="#add-a-site-homepage" title="Permalink to this headline">¶</a></h3>
+<p>Each page in the site has an associated &#8216;type&#8217;. This type corresponds to a Ruby
+class that inherits from the <tt class="docutils literal"><span class="pre">Content</span></tt> base class defined in <tt class="docutils literal"><span class="pre">lib/content.rb</span></tt>.</p>
+<p>Content types are defined in the <tt class="docutils literal"><span class="pre">schema</span></tt> directory by default. There will
+already be some files in there <tt class="docutils literal"><span class="pre">page.rb</span></tt>, <tt class="docutils literal"><span class="pre">piece.rb</span></tt> and <tt class="docutils literal"><span class="pre">box.rb</span></tt>. These
+define some top-level convenience classes that you should use as the basis for
+your site&#8217;s schema.</p>
+<p>Now onto creating our site&#8217;s schema.</p>
+<p>Create the file <tt class="docutils literal"><span class="pre">schema/homepage.rb</span></tt> and paste the following code into
+it:</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/homepage.rb</span>
+
+<span class="k">class</span> <span class="nc">Homepage</span> <span class="o">&lt;</span> <span class="no">Page</span>
+  <span class="n">box</span> <span class="ss">:recipes</span> <span class="k">do</span>
+    <span class="n">allow</span> <span class="ss">:Recipe</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>This is a very minimal start. All we&#8217;ve done is to define a <tt class="docutils literal"><span class="pre">Homepage</span></tt> content
+type that inherits from <tt class="docutils literal"><span class="pre">Page</span></tt> and has a box called <tt class="docutils literal"><span class="pre">recipes</span></tt> that allows us
+to add instances of some <tt class="docutils literal"><span class="pre">Recipe</span></tt> content type.</p>
+<p>This is the basis of a Spontaneous site. A set of <tt class="docutils literal"><span class="pre">Page</span></tt> types that have boxes
+allowing us to add other <tt class="docutils literal"><span class="pre">Page</span></tt> types. This is how you build your site&#8217;s hierarchy,
+starting at the site homepage.</p>
+</div>
+<div class="section" id="define-our-recipe-type">
+<h3>Define our Recipe Type<a class="headerlink" href="#define-our-recipe-type" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">Recipe</span></tt> type we referred to in our <tt class="docutils literal"><span class="pre">Homepage</span></tt> doesn&#8217;t exist so we need
+to create that before we do anything else.</p>
+<p>Create a file called <tt class="docutils literal"><span class="pre">recipe.rb</span></tt> in the <tt class="docutils literal"><span class="pre">schema</span></tt> directory:</p>
 <div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
 <span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>The line beginning with <tt class="docutils literal"><span class="pre">class</span></tt> is where we define our content type. In this
-case we are calling it <tt class="docutils literal"><span class="pre">Recipe</span></tt> &#8211; all content types are named with a capital
-letter. We want our recipes to be directly accessible in the browser so we know
-they are pages. The part &#8220;<tt class="docutils literal"><span class="pre">&lt;</span> <span class="pre">Page</span></tt>&#8221; can be read as &#8220;extends Page&#8221; or &#8220;inherits
-from Page&#8221;.</p>
+<p>This is another <tt class="docutils literal"><span class="pre">Page</span></tt> type. At the moment it doesn&#8217;t do much but we can fill
+in the details later.</p>
+<p>What it lets us do though is start our server and see what we&#8217;ve created so far.</p>
+</div>
+<div class="section" id="run-the-development-server">
+<h3>Run the Development Server<a class="headerlink" href="#run-the-development-server" title="Permalink to this headline">¶</a></h3>
+<p>In order to see what we&#8217;ve done we need to run the CMS server application:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>spot server
+</pre></div>
+</div>
+<p>This will start a server running on on your machine. The default development URL
+is &lt;<a class="reference external" href="http://127.0.0.1:2011">http://127.0.0.1:2011</a>&gt;.</p>
+<p>Open your browser and navigate to &lt;<a class="reference external" href="http://127.0.0.1:2011/&#64;spontaneous">http://127.0.0.1:2011/&#64;spontaneous</a>&gt;. You
+should see something that looks like this:</p>
+<img alt="Add homepage dialogue" src="../../figures/tutorial/screenshot-add-homepage-1.png" style="width: 50%;" />
+<p>In order to start building your site, you need to choose a content type that
+will be used for the site homepage.</p>
+<p>Select the &#8220;Homepage&#8221; entry in this dialogue:</p>
+<img alt="Add homepage dialogue with content type selected" src="../../figures/tutorial/screenshot-add-homepage-2.png" style="width: 50%;" />
+<p>And then click &#8220;Create&#8221;.</p>
+<p>Once that&#8217;s done you should see something like this:</p>
+<img alt="Editing screen for our new site homepage" src="../../figures/tutorial/screenshot-edit-homepage-1.png" style="width: 50%;" />
+<p>What you&#8217;re seeing is the editing view of your new site homepage.</p>
+<p>It has a &#8216;title&#8217; field and below that you can see the &#8216;recipes&#8217; box we defined
+above.</p>
+<p>Below the box name you can see one button labelled &#8220;Recipe&#8221;. This is what we use
+to add things to our homepage. Because the only thing we&#8217;ve &#8216;allowed&#8217; to be
+added to our recipes box are instances of the <tt class="docutils literal"><span class="pre">Recipe</span></tt> type, we only have this
+one button.</p>
+<p>Go ahead and click the &#8220;Recipe&#8221; button to add a <tt class="docutils literal"><span class="pre">Recipe</span></tt> instance to our box:</p>
+<img alt="Adding a recipe page" src="../../figures/tutorial/screenshot-edit-homepage-2.png" style="width: 50%;" />
+<p>A new <tt class="docutils literal"><span class="pre">Recipe</span></tt> instance will appear with its title field open for editing.
+Choose a title for your recipe, &#8220;Mashed Potatoes&#8221; in this case and hit save.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As well as using the &#8216;Save&#8217; button you could also just hit return,
+type Ctrl-S or (on a Mac) Cmd-S &#8211; Spontaneous tries to make
+everything as natural as possible.</p>
+</div>
+<img alt="The new recipe page" src="../../figures/tutorial/screenshot-edit-homepage-3.png" style="width: 50%;" />
+<p>If you move the mouse just below the recipe we&#8217;ve just added you should see a
+button appear identical to the one we just clicked. This button allows you to
+add a recipe below the one we&#8217;ve just added. Boxes allow you to add items
+anywhere using these inline buttons. Add another recipe and move the mouse
+around between them, you&#8217;ll see the &#8216;Recipe&#8217; button appear in all the gaps.</p>
+<p>Add as many recipes as you want. If you want to re-order them simply click and
+hold the mouse on any entry and you should be able to drag it around to the
+right position.</p>
+<p>There, we&#8217;ve created our homepage and some recipes.</p>
+<p>These recipes aren&#8217;t very interesting or useful though. To improve the situation
+we need to expand the definition of the <tt class="docutils literal"><span class="pre">Recipe</span></tt> type.</p>
+<img alt="Multiple recipes in the recipe box" src="../../figures/tutorial/screenshot-edit-homepage-4.png" style="width: 50%;" />
+</div>
 <div class="section" id="defining-editable-fields">
 <h3>Defining Editable Fields<a class="headerlink" href="#defining-editable-fields" title="Permalink to this headline">¶</a></h3>
 <p>So now we have a page type called &#8220;Recipe&#8221;. Now we need to define the editable
@@ -140,6 +222,9 @@ of the content type definition. The syntax is:</p>
 <p><tt class="docutils literal"><span class="pre">field_name</span></tt> is what you&#8217;ll use to refer to the value of the field within your
 templates (see later) and also the name that will show up in the editing
 interface.</p>
+<p>If you hit &#8216;reload&#8217; in your browser Spontaneous will reload your schema code
+and your site homepage should look something like this:</p>
+<img alt="The new Recipe 'description' and 'photo' fields" src="../../figures/tutorial/screenshot-edit-homepage-5.png" style="width: 50%;" />
 <p>If you wanted to use a different name for the field in the user interface, you
 would pass a value for <tt class="docutils literal"><span class="pre">title</span></tt> in the field options:</p>
 <div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;A short description&quot;</span>
@@ -147,6 +232,7 @@ would pass a value for <tt class="docutils literal"><span class="pre">title</spa
 </div>
 <p>This would change the name of the field in the user interface to &#8220;A short
 description&#8221; but the internal name of the field would still be &#8220;description&#8221;.</p>
+<img alt="Renaming the 'description' field" src="../../figures/tutorial/screenshot-edit-homepage-6.png" style="width: 50%;" />
 <p>The second parameter to the field definition is the field type. The basic field
 types are <tt class="docutils literal"><span class="pre">:string</span></tt>, <tt class="docutils literal"><span class="pre">:text</span></tt> and <tt class="docutils literal"><span class="pre">:image</span></tt> (though there are more see
 <a class="reference internal" href="schema/fields.html#schema-field-types"><em>Field Types</em></a>).</p>
@@ -210,7 +296,9 @@ defined. How come?</p>
 <p>The secret is in the <tt class="docutils literal"><span class="pre">Page</span></tt> content type that <tt class="docutils literal"><span class="pre">Recipe</span></tt> inherits from. This
 <tt class="docutils literal"><span class="pre">Page</span></tt> type is defined in the <tt class="docutils literal"><span class="pre">schema/page.rb</span></tt> file that Spontaneous will
 have generated for you. It will look something like this:</p>
-<div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Page</span> <span class="o">&lt;</span> <span class="no">Spontaneous</span><span class="o">::</span><span class="no">Page</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="kp">include</span> <span class="s1">&#39;content&#39;</span>
+
+<span class="k">class</span> <span class="nc">Page</span> <span class="o">&lt;</span> <span class="no">Content</span><span class="o">::</span><span class="no">Page</span>
   <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s2">&quot;New Page&quot;</span>
 <span class="k">end</span>
 </pre></div>
@@ -242,10 +330,12 @@ to something more appropriate:</p>
 <span class="k">end</span>
 </pre></div>
 </div>
+<p>Now, when we add a recipe we are presented with this:</p>
+<img alt="The new default title value" src="../../figures/tutorial/screenshot-edit-homepage-7.png" style="width: 50%;" />
 <p>For more details on defining fields see <a class="reference internal" href="schema/fields.html#schema-fields"><em>Fields</em></a>.</p>
 <p>Now we have the fields defined for our Recipe type, but what about the
 ingredients and instructions? For that we need to learn how to use the next most
-important element of the Spontaneous schema: Boxes.</p>
+important element of the Spontaneous schema: boxes.</p>
 </div>
 </div>
 <div class="section" id="creating-and-filling-content-boxes">
@@ -330,26 +420,239 @@ number of &#8220;Step&#8221; pieces. Each Step has a set of instructions and a p
 photo field has a <tt class="docutils literal"><span class="pre">comment</span></tt> set &#8211; this will appear in the user interface in
 order to offer some guidance to editors. In this case we&#8217;re telling them that
 they don&#8217;t have to have a photo for each step.</p>
-<p>That&#8217;s enough to power our recipe site.</p>
-</div>
-</div>
-<div class="section" id="run-the-development-server">
-<h2>Run the Development Server<a class="headerlink" href="#run-the-development-server" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>spot server
-</pre></div>
+<p>For now that&#8217;s enough to power our recipe site.</p>
 </div>
 </div>
 <div class="section" id="use-the-cms-user-interface-to-build-your-site">
 <h2>Use the CMS User Interface to Build Your Site<a class="headerlink" href="#use-the-cms-user-interface-to-build-your-site" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a simple schema, we can go ahead and write a recipe.</p>
+<div class="section" id="navigating-within-the-cms">
+<h3>Navigating within the CMS<a class="headerlink" href="#navigating-within-the-cms" title="Permalink to this headline">¶</a></h3>
+<p>To do that we first need to navigate to one of the recipe pages within the CMS.</p>
+<p>There are two ways to do this:</p>
+<p>By clicking on the recipe title in the &#8216;Recipes&#8217; box:</p>
+<img alt="Navigating to a Recipe page using its title" src="../../figures/tutorial/screenshot-edit-navigation-1.png" style="width: 50%;" />
+<p>or choosing the page from the pulldown in the navigation bar:</p>
+<img alt="Navigating to a Recipe page using the site browser" src="../../figures/tutorial/screenshot-edit-navigation-2.png" style="width: 50%;" />
+<p>Once there you will see the editor for our <tt class="docutils literal"><span class="pre">Recipe</span></tt> page with the
+&#8220;Ingredients&#8221; and &#8220;Instructions&#8221; boxes we defined in the schema:</p>
+<img alt="Editing a Recipe page" src="../../figures/tutorial/screenshot-edit-recipe-1.png" style="width: 50%;" />
+</div>
+<div class="section" id="page-urls">
+<h3>Page URLs<a class="headerlink" href="#page-urls" title="Permalink to this headline">¶</a></h3>
+<p>You can also see the page&#8217;s URL path, in this case <tt class="docutils literal"><span class="pre">/dauphinoise-potatoes</span></tt>. This
+has been automatically taken from the page&#8217;s title.</p>
+<p>These paths define the public URL of the page. So if our new recipes site is
+hosted at &#8216;spontaneous-recipes.com&#8217; the full URL of our new Dauphinoise Potatoes
+recipe will be <tt class="docutils literal"><span class="pre">http://spontaneous-recipes.com/dauphinoise-potatoes</span></tt>.</p>
+<p>If you don&#8217;t like a page&#8217;s URL then to change it simply click on it and you&#8217;ll
+be presented with a text input:</p>
+<img alt="Changing a page's URL" src="../../figures/tutorial/screenshot-edit-recipe-path-1.png" style="width: 50%;" />
+<p>This is a special editor that will automatically convert your typing into URL
+safe characters: spaces and other punctuation will be converted to dashes and
+all text will be made lower case.</p>
+<p>The editor will also warn you if your new path is invalid or a duplicate (having
+two pages with the same path would stop one of them from being visible).</p>
+<img alt="Warning for a duplicate URL" src="../../figures/tutorial/screenshot-edit-recipe-path-2.png" style="width: 50%;" />
+</div>
+<div class="section" id="building-the-page">
+<h3>Building the Page<a class="headerlink" href="#building-the-page" title="Permalink to this headline">¶</a></h3>
+<p>First fill in the page&#8217;s description and choose an image. To to this, click on
+the page fields to reveal the editing interface and fill in the text. To set the
+photo you can either:</p>
+<ol class="arabic simple">
+<li>Click on the grey photo placeholder which will pop up a file-picker dialogue
+or</li>
+<li>Drag a file from your desktop of file browser and drop it onto the grey photo
+placeholder.</li>
+</ol>
+<img alt="Adding the page's description &amp; photo" src="../../figures/tutorial/screenshot-edit-recipe-2.png" style="width: 50%;" />
+<p>Once you&#8217;re happy with the page&#8217;s description &amp; image save the fields (using the
+save button, Ctrl-S or Cmd-S).</p>
+<p>Now we want to add our ingredients by going to the &#8220;Ingredients&#8221; box and
+clicking the add &#8220;Ingredient&#8221; button. To add the ingredients in order, use the
+add ingredient button that appears below the last ingredient in the list.</p>
+<img alt="Adding an ingredient at the bottom of the list" src="../../figures/tutorial/screenshot-edit-recipe-ingredients-1.png" style="width: 50%;" />
+<p>As you add each ingredient fill in the &#8220;Name&#8221; &amp; &#8220;Quantity&#8221; fields appropriately.</p>
+<img alt="The final list of ingredients" src="../../figures/tutorial/screenshot-edit-recipe-ingredients-2.png" style="width: 50%;" />
+<p>Do the same for the Instructions box:</p>
+<img alt="Our list of instructions" src="../../figures/tutorial/screenshot-edit-recipe-instructions-1.png" style="width: 50%;" />
+<p>That&#8217;s it. Our recipe content is complete.</p>
+</div>
 </div>
 <div class="section" id="create-html-templates">
 <h2>Create HTML Templates<a class="headerlink" href="#create-html-templates" title="Permalink to this headline">¶</a></h2>
+<p>Now that we&#8217;ve finished editing let&#8217;s see how our site will look like to
+visitors:</p>
+<img alt="A first preview of our site" src="../../figures/tutorial/screenshot-template-1.png" style="width: 50%;" />
+<p>Oh. Not very good. What we&#8217;re seeing is Spontaneous&#8217;s default page template
+simply dumping the values of your fields.</p>
+<div class="section" id="layouts">
+<h3>Layouts<a class="headerlink" href="#layouts" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;ve ever used Ruby on Rails you&#8217;ll be familiar with the concept of
+&#8216;layouts&#8217;. They are the top-level frame within which the rest of a page&#8217;s
+content is &#8220;hung&#8221;, so to speak. Spontaneous uses the same concept (and a similar
+file layout).</p>
+<p>The file <tt class="docutils literal"><span class="pre">templates/layouts/standard.html.cut</span></tt> is the default layout for every
+page. It has some HTML5 boiler plate at the top and then this:</p>
+<div class="highlight-html"><div class="highlight"><pre>%{ block :content }
+  <span class="nt">&lt;h2&gt;</span>Welcome to example.com<span class="nt">&lt;/h2&gt;</span>
+  ${ fields }
+  ${ boxes }
+%{ endblock :content }
+</pre></div>
 </div>
-<div class="section" id="preview-your-site">
-<h2>Preview Your Site<a class="headerlink" href="#preview-your-site" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">block</span></tt> and <tt class="docutils literal"><span class="pre">endblock</span></tt> directives are part of Spontaneous&#8217;s template
+inheritance system (which is modelled after Django&#8217;s).</p>
+<p>If we want to create a layout specific to our recipes then all we need to do is
+inherit from this standard layout and overwrite the contents of the <tt class="docutils literal"><span class="pre">content</span></tt>
+block you see defined above.</p>
+<p>To do this, add the file <tt class="docutils literal"><span class="pre">templates/layouts/recipe.html.cut</span></tt> with the
+following contents:</p>
+<div class="highlight-html"><div class="highlight"><pre>%{ extends &quot;layouts/standard&quot; }
+%{ block :content }
+  <span class="nt">&lt;h3&gt;</span>${ title }<span class="nt">&lt;/h3&gt;</span>
+  ${ description }
+  ${ photo }
+  ${ ingredients }
+  ${ instructions }
+%{ endblock }
+</pre></div>
 </div>
-<div class="section" id="publish-your-changes">
-<h2>Publish Your Changes<a class="headerlink" href="#publish-your-changes" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">extends</span></tt> directive right at the start specifies that we are extending the
+standard layout and the <tt class="docutils literal"><span class="pre">block</span></tt> ... <tt class="docutils literal"><span class="pre">endblock</span></tt> section overwrites the
+contents of the standard layout file with our modified code. The rest of the
+layout will be the same as the standard layout, including the <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> block.</p>
+<p>The <tt class="docutils literal"><span class="pre">${</span> <span class="pre">}</span></tt> blocks are Spontaneous tags. <tt class="docutils literal"><span class="pre">title</span></tt>, <tt class="docutils literal"><span class="pre">description</span></tt> and
+<tt class="docutils literal"><span class="pre">photo</span></tt> reference the page fields and will insert their HTML values into the
+page. In the case of the <tt class="docutils literal"><span class="pre">photo</span></tt> field this will insert a full <tt class="docutils literal"><span class="pre">&lt;img/&gt;</span></tt> tag
+with correct <tt class="docutils literal"><span class="pre">width</span></tt> and <tt class="docutils literal"><span class="pre">height</span></tt> attributes.</p>
+<p>The <tt class="docutils literal"><span class="pre">${</span> <span class="pre">ingredients</span> <span class="pre">}</span></tt> and <tt class="docutils literal"><span class="pre">${</span> <span class="pre">instructions</span> <span class="pre">}</span></tt> tags will insert the boxes,
+once we have defined their templates.</p>
+<p>The resulting page looks pretty much the same as before but we are well on our
+way to having a working recipe page.</p>
+</div>
+<div class="section" id="the-ingredients-instructions">
+<h3>The Ingredients &amp; Instructions<a class="headerlink" href="#the-ingredients-instructions" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s add the ingredient list. First let&#8217;s create a template for the
+&#8220;ingredients&#8221; box. Make a directory <tt class="docutils literal"><span class="pre">templates/recipe</span></tt> and add the file
+<tt class="docutils literal"><span class="pre">templates/recipe/ingredients.html.cut</span></tt> with the following markup:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;ingredients&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h4&gt;</span>Ingredients<span class="nt">&lt;/h4&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    ${ contents }
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>If we reload our site preview it should look like this:</p>
+<img alt="Our ingredient list coming together" src="../../figures/tutorial/screenshot-template-2.png" style="width: 50%;" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can preview your new page without having the CMS navigation bar
+included by going directly to the URL of the page, in this case we can
+type &lt;<a class="reference external" href="http://127.0.0.1:2011/dauphinoise-potatoes">http://127.0.0.1:2011/dauphinoise-potatoes</a>&gt; and preview our site
+exactly as it would appear to visitors.</p>
+</div>
+<p>All we need to do now is to create a template for the <tt class="docutils literal"><span class="pre">Ingredient</span></tt> type and
+our ingredient list is complete.</p>
+<p>Create the file <tt class="docutils literal"><span class="pre">templates/ingredient.html.cut</span></tt> with the following markup:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;li&gt;</span>
+  <span class="nt">&lt;strong&gt;</span>${ name }<span class="nt">&lt;/strong&gt;</span> (${ quantity })
+<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+</div>
+<img alt="The complete ingredients list" src="../../figures/tutorial/screenshot-template-3.png" style="width: 50%;" />
+<p>Now onto the instructions.</p>
+<p>Create the file <tt class="docutils literal"><span class="pre">templates/recipe/instructions.html.cut</span></tt> with the following
+markup:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;instructions&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h4&gt;</span>Instructions<span class="nt">&lt;/h4&gt;</span>
+  <span class="nt">&lt;ol&gt;</span>
+    %{ contents.each do | step | }
+      ${ step }
+    %{ end }
+  <span class="nt">&lt;/ol&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>This template uses an alternate way of rendering the contents of a box. The
+<tt class="docutils literal"><span class="pre">ingredients.html.cut</span></tt> template used the simple directive <tt class="docutils literal"><span class="pre">${</span> <span class="pre">contents</span> <span class="pre">}</span></tt>
+but here we&#8217;re explicitly iterating over the <tt class="docutils literal"><span class="pre">contents</span></tt> collection and then
+rendering each instruction in turn.</p>
+<p>The final step is to create the template for the instructions themselves. Our
+instructions are composed of a series of <tt class="docutils literal"><span class="pre">Step</span></tt> types so in
+<tt class="docutils literal"><span class="pre">templates/step.html.cut</span></tt> add the following markup:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;li&gt;</span>${ instructions }<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+</div>
+<p>Now we have our recipe in all its glory:</p>
+<img alt="Our final page with ingredients and instructions" src="../../figures/tutorial/screenshot-template-4.png" style="width: 50%;" />
+<p>Now we&#8217;re ready to make our site live.</p>
+</div>
+</div>
+<div class="section" id="publish-your-site">
+<h2>Publish Your Site<a class="headerlink" href="#publish-your-site" title="Permalink to this headline">¶</a></h2>
+<p>Clicking on the &#8220;Publish&#8221; button at the top right will bring up a list of pages
+that have been modified and need publishing. Because we have never published our
+site this list shows every page we have created:</p>
+<img alt="The list of pages to publish" src="../../figures/tutorial/screenshot-publishing-1.png" style="width: 50%;" />
+<p>Click on the &#8220;Publish&#8221; button at the bottom right and your site will be
+published and rendered.</p>
+<p>If you want to see your published site visit <a class="reference external" href="http://127.0.0.1:2012">http://127.0.0.1:2012</a> &#8212; there
+shouldn&#8217;t be anything surprising here, as it will look exactly the same as the
+preview version we&#8217;ve been looking at.</p>
+</div>
+<div class="section" id="making-changes">
+<h2>Making Changes<a class="headerlink" href="#making-changes" title="Permalink to this headline">¶</a></h2>
+<p>We have already seen how to add items to boxes and edit their fields. There are
+a couple of other things we can do though.</p>
+<div class="section" id="deleting-things">
+<h3>Deleting Things<a class="headerlink" href="#deleting-things" title="Permalink to this headline">¶</a></h3>
+<p>If you want to delete something from a box then click on the delete icon that
+you&#8217;ll see at the right of every entry in a box.</p>
+<img alt="Deleting an item" src="../../figures/tutorial/screenshot-deleting-1.png" style="width: 50%;" />
+</div>
+<div class="section" id="hiding-things">
+<h3>Hiding Things<a class="headerlink" href="#hiding-things" title="Permalink to this headline">¶</a></h3>
+<p>Occasionally you might have something in the site that you want to temporarily
+hide. Perhaps the most of a page is ready but one entry is only half done and
+you need to publish what you have. Or perhaps a page that you&#8217;ve made live needs
+to be removed from the site temporarily.</p>
+<p>If this is the case then simply click on the &#8216;hide&#8217; icon below the delete icon. It
+will hide the entry from the preview &amp; published site.</p>
+<p>Let&#8217;s pretend that our new dauphinoise potatoes recipe needs to be put on hold
+for a few weeks while we try out some new recipes.</p>
+<p>First we need to alter our homepage so that we can navigate our recipes.</p>
+<p>This is simply a matter of creating a template that the <tt class="docutils literal"><span class="pre">Recipe</span></tt> type will use
+to display itself inline within a page. When accessed directly recipes use the
+<tt class="docutils literal"><span class="pre">templates/layouts/recipe.html.cut</span></tt> template but when they are being shown
+&#8216;inline&#8217; they will use the <tt class="docutils literal"><span class="pre">templates/recipe.html.cut</span></tt> template:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;recipe&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;${ path }&quot;</span><span class="nt">&gt;</span>${ title }<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+  <span class="nt">&lt;p&gt;</span>${ photo(width: 200) }<span class="nt">&lt;/p&gt;</span>
+  ${ description }
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Now our homepage preview will look something like this:</p>
+<img alt="Our new homepage with recipes" src="../../figures/tutorial/screenshot-hiding-1.png" style="width: 50%;" />
+<p>Switch back to edit mode and click the hide icon for the dauphinoise potatoes
+recipe:</p>
+<img alt="Hiding a recipe" src="../../figures/tutorial/screenshot-hiding-2.png" style="width: 50%;" />
+<p>The recipe appears as slightly faded, which means that it&#8217;s hidden. Now when we
+change to the preview, we see this:</p>
+<img alt="The hidden recipe doesn't appear in the preview" src="../../figures/tutorial/screenshot-hiding-3.png" style="width: 50%;" />
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>This has been a whirlwind tour of making websites with Spontaneous. Lots of
+detail has been skipped over in order to keep things moving along.</p>
+<p>Having said that, the great thing about Spontaneous for users is that the
+instructions above describing adding, editing, deleting and hiding content
+using the CMS are basically all you need to know in order to use it.</p>
+<p>If you want to know more then please use this, still evolving, documentation.</p>
 </div>
 </div>
 
@@ -364,6 +667,9 @@ they don&#8217;t have to have a photo for each step.</p>
 <li><a class="reference internal" href="#">Spontaneous CMS Tutorial</a><ul>
 <li><a class="reference internal" href="#generate-a-website-skeleton">Generate a Website Skeleton</a></li>
 <li><a class="reference internal" href="#create-your-schema">Create Your Schema</a><ul>
+<li><a class="reference internal" href="#add-a-site-homepage">Add a Site Homepage</a></li>
+<li><a class="reference internal" href="#define-our-recipe-type">Define our Recipe Type</a></li>
+<li><a class="reference internal" href="#run-the-development-server">Run the Development Server</a></li>
 <li><a class="reference internal" href="#defining-editable-fields">Defining Editable Fields</a><ul>
 <li><a class="reference internal" href="#where-s-the-title">Where&#8217;s the title?</a></li>
 </ul>
@@ -371,11 +677,24 @@ they don&#8217;t have to have a photo for each step.</p>
 <li><a class="reference internal" href="#creating-and-filling-content-boxes">Creating and Filling Content Boxes</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#run-the-development-server">Run the Development Server</a></li>
-<li><a class="reference internal" href="#use-the-cms-user-interface-to-build-your-site">Use the CMS User Interface to Build Your Site</a></li>
-<li><a class="reference internal" href="#create-html-templates">Create HTML Templates</a></li>
-<li><a class="reference internal" href="#preview-your-site">Preview Your Site</a></li>
-<li><a class="reference internal" href="#publish-your-changes">Publish Your Changes</a></li>
+<li><a class="reference internal" href="#use-the-cms-user-interface-to-build-your-site">Use the CMS User Interface to Build Your Site</a><ul>
+<li><a class="reference internal" href="#navigating-within-the-cms">Navigating within the CMS</a></li>
+<li><a class="reference internal" href="#page-urls">Page URLs</a></li>
+<li><a class="reference internal" href="#building-the-page">Building the Page</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-html-templates">Create HTML Templates</a><ul>
+<li><a class="reference internal" href="#layouts">Layouts</a></li>
+<li><a class="reference internal" href="#the-ingredients-instructions">The Ingredients &amp; Instructions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#publish-your-site">Publish Your Site</a></li>
+<li><a class="reference internal" href="#making-changes">Making Changes</a><ul>
+<li><a class="reference internal" href="#deleting-things">Deleting Things</a></li>
+<li><a class="reference internal" href="#hiding-things">Hiding Things</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
 </ul>
 </li>
 </ul>

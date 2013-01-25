@@ -1,5 +1,10 @@
 source :rubygems
 
 gem 'guard'
-gem 'rb-fsevent', '~> 0.9.1'
 gem 'guard-shell'
+
+group :development do
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
+end

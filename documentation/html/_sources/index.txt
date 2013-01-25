@@ -21,6 +21,8 @@ Contents:
    media
    schema
    ui
+   templates
+   outputs
    solutions
 
 
