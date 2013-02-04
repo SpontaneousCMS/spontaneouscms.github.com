@@ -2,8 +2,8 @@
 
 .. _tutorial:
 
-Spontaneous CMS Tutorial
-=======================================
+Spontaneous CMS Tutorial Part 1 -- Creating a Basic Site
+========================================================
 
 This will walk you through creating your first Spontaneous project. In this
 tutorial we're going to look at the creation of a simple site that will let you
@@ -814,6 +814,23 @@ change to the preview, we see this:
    :alt: The hidden recipe doesn't appear in the preview
    :width: 50%
 
+To make these changes live we click "Publish" again:
+
+
+.. image:: ../../figures/tutorial/screenshot-hiding-4.png
+   :alt: Our hidden page shows up in the list of pages to publish
+   :width: 50%
+
+We select our recipe for publishing by clicking on the arrow which moves it
+across from the "Modified" list to the "Publish" list:
+
+.. image:: ../../figures/tutorial/screenshot-hiding-5.png
+   :alt: Selecting our page for publishing
+   :width: 50%
+
+And then click "Publish". Our live site http://127.0.0.1:2012/ will now look
+like our preview site with the dauphinoise potatoes recipe hidden.
+
 Next Steps
 ----------
 
@@ -824,4 +841,5 @@ Having said that, the great thing about Spontaneous for users is that the
 instructions above describing adding, editing, deleting and hiding content
 using the CMS are basically all you need to know in order to use it.
 
-If you want to know more then please use this, still evolving, documentation.
+In the next part :ref:`tutorial2` we will go into more depth and show you how to
+manage images, create aliases and work with CSS & Javascript.
