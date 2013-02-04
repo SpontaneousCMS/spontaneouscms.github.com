@@ -4,8 +4,8 @@
 		<meta charset="UTF-8">
 		<title>Spontaneous CMS</title>
 		<link href="http://fonts.googleapis.com/css?family=News+Cycle:400,700" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="splash.css" />
-		<link rel="stylesheet" href="gist.css" />
+		<link rel="stylesheet" href="css/splash2.css" />
+		<link rel="stylesheet" href="css/gist.css" />
 		<script type="text/javascript">
 			var h=window.location.host;
 			if (h && h !== "localhost" && h !== "127.0.0.1") {
@@ -33,9 +33,190 @@
 
 			<h3>The Next Generation Now</h3>
 
-			<p>Online content management is not a solved problem. The web is evolving. Websites have to do more than ever before and technology is constantly improving yet the basic assumptions &amp; design of current CMS systems haven’t changed.</p>
+			<p>Online content management is not a solved problem. The web is
+			evolving. Websites have to do more than ever before and technology is
+			constantly improving yet the basic assumptions &amp; design of current
+			CMS systems haven’t changed.</p>
 
-			<p>Spontaneous takes a radically different approach and by doing so creates exciting new possibilities for both web developers and editors.</p>
+			<p>Spontaneous takes a radically different approach.</p>
+
+			<p>Its sophisticated code-driven metadata system straddles the line
+			between a web application framework and a more traditional content
+			management system. It allows developers to model complex relational data
+			yet provides editors with a consistent and intuitive user interface.</p>
+
+			<p> The following is a quick tour of the features that make Spontaneous
+			the best CMS in the world. </p>
+
+			<h3>Metadata in Code, Not the Database</h3>
+
+			<p> Spontaneous is highly structured. You build a site by writing Ruby
+			classes that define content types and the relations between them much
+			like you would between tables in a database. </p>
+
+			<p>In Spontaneous this collection of Ruby classes is called the ‘schema’.
+			It is what makes the system as a whole so powerful and flexible.</p>
+
+			<script src="https://gist.github.com/4587221.js"></script>
+
+			<div class="figure">
+				<p class="image">
+				<a href="figures/screenshot-basic-editing.png" class="zoom"><img src="figures/screenshot-basic-editing.thumb.png" alt="" /></a>
+				</p>
+				<div class="caption">
+					<h4>The schema above generates this editing interface.</h4>
+					<p>At the top is a navigation and toolbar. Below that is the page information, its title and URL. Then the page’s fields, in this case it’s title, welcome text and image. Next is the list of ‘boxes’ which are where you build the page content and children. Each box has a list of content types that it accepts, in this simple example we have only allowed the addition of ‘Blog Section’ pages.</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+
+
+			<h3>Cutting Edge User Interface</h3>
+
+			<p>Instead of relying on a WYSIWYG editor and placing the burden of layout on the content editor, Spontaneous instead has a content model based on multiple lists of simple content “pieces”.</p>
+
+			<p>Defined within the schema, each site can have as many content types as necessary and each can have as many ‘fields’ as needed. These fields are laid out within templates coded by the developer.  </p>
+
+			<p>By adding a piece of content and filling in its fields with text and images, editors are adding a beautifully and consistently styled element to their web-page without having to even think about layout.</p>
+
+			<p>Spontaneous uses feature detection to ensure that only the most capable browsers are able to access the editing interface. This means that it is free to lay on a rich layer of cutting-edge HTML5 features to make the editing experience as pleasant as possible:</p>
+
+			<ul>
+				<li>
+				<strong>A perfect preview.</strong> The preview mode shows you the site exactly as it will appear once any changes are published. There is no CMS specific code inserted that might alter the way the page looks or behaves. The preview is identical right down to the HTML (barring certain desirable exceptions such as analytics tracking code).
+				</li>
+				<li>
+				<strong>Clean, clear, attractive and uncluttered design.</strong> It’s all about removing buttons, not adding them.
+				<div class="figure">
+					<p class="image">
+					<a href="figures/screenshot-basic-editing.png" class="zoom"><img src="figures/screenshot-basic-editing.thumb.png" alt="" /></a>
+					</p>
+					<div class="caption">
+						<h4>Nothing Between You and Your Site</h4>
+						<p>Spontaneous’s way of breaking complex pages down into simple pieces means that content composition is a series of simple steps. Because almost everything about the site is specific to the requirements of that site there is no need for lots of generic buttons, pulldowns and choices. The only text in this screenshot that wasn’t decided by the site’s developer are the words ‘publish’ and ‘preview’...</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				</li>
+				<li>
+				<strong>Simple actions leading to predictable outcomes.</strong> WYSIWYG is a lie. Reliability and predicitability are worth more than a live preview.
+				</li>
+				<li>
+				<strong>Sophisticated context-sensitive Markdown editor.</strong> Because layout is handled by the CMS through templates, the text editor is only needed to add simple text styles.
+				<div class="figure">
+					<p class="image">
+					<a href="figures/screenshot-markdown-editor.png" class="zoom"><img src="figures/screenshot-markdown-editor.thumb.png" alt="" /></a>
+					</p>
+					<div class="caption">
+						<h4>Smart Editing</h4>
+						<p>Markdown is perfect for basic styling of text and Spontaneous’s editor is perfect for Markdown. It is smart enough to know when your cursor is within a bold, italic, headline or link section so allows you to edit or toggle these styles without having to painstakingly re-select the marked text. It’s also smart enough to translate ‘@spontaneouscms’ into a link to the <a href="https://twitter.com/spontaneouscms">relevant Twitter profile</a>.</p>
+
+					</div>
+					<div class="clear"></div>
+				</div>
+				</li>
+				<li>
+				<strong>Resumable and verified uploads.</strong> Large files are uploaded in pieces. Each piece has its integrity verified using a SHA checksum and the final file is reassembled from these pieces.
+				<p><span class="strike">If</span> When you lose internet connectivity or your browser crashes half-way uploading a 700Mb video over your rural ADSL connection<sup>*</sup> Spontaneous will re-use nearly all the data you uploaded the next time you try.</p>
+				<p>
+				<sup>*</sup> A real situation.
+				</p>
+				<div class="figure">
+					<p class="image">
+					<a href="figures/screenshot-image-upload.png" class="zoom"><img src="figures/screenshot-image-upload.thumb.png" alt="" /></a>
+					</p>
+					<div class="caption">
+						<h4>Drag &amp; Drop Uploading</h4>
+						<p>Simply drop a file onto an image preview to upload it — you will be rewarded with an accurate progress meter. Multiple files will be queued and uploaded one at a time and are processed asynchronously on the server so you can carry on editing whilst your images are processed (and perhaps uploaded to the cloud).</p>
+
+					</div>
+					<div class="clear"></div>
+				</div>
+				</li>
+				<li>
+				<strong>Publishing progress indicator.</strong> Watch your changes go live in real time.
+				<div class="figure">
+					<p class="image">
+					<a href="figures/screenshot-publish-progress.png" class="zoom"><img src="figures/screenshot-publish-progress.thumb.png" alt="" /></a>
+					</p>
+					<div class="caption">
+						<h4>Worth the (Short) Wait</h4>
+						<p>The separate publishing step transforms your changes into static pages<sup>*</sup> and indexes the site. This is run in the background using a low-priority process so that it doesn’t affect the performance of the site but you recieve progress updates in real time.</p>
+
+						<p>
+						<sup>*</sup> Unless they contain some dynamic component.
+						</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				</li>
+			</ul>
+
+			<h3>Multiple outputs</h3>
+
+			<p>HTML is no longer enough. </p>
+
+
+
+			<p>Each page type in the Spontaneous schema can declare multiple outputs. Starting with a default HTML view you can add any number &amp; mix of alternate HTML, XML based syndication feeds, JSON and plain text versions. This means your content is available in the browser but also in that native mobile application you want to provide. In future the aim is to extend this system to support more complex formats such as PDF, MOBI and EPUB (to name but a few).</p>
+
+			<script src="https://gist.github.com/4605834.js"></script>
+
+			<p>You can also define your own outputs such as one that inserts rows in a database, or communicates with an external service so they can also form a part of integrating Spontaneous into a larger system.</p>
+
+			<h3>Powerful Search</h3>
+
+			<p>Built in to the CMS and configured within the content schema is a powerful search system based upon <a href="http://xapian.org/">Xapian</a>.</p>
+
+			<p>Each Spontaneous site can have multiple search indexes encompassing a subset of content types.</p>
+
+			<p>
+			<script src="https://gist.github.com/4587894.js"></script>
+			</p>
+
+			<h3>Content Aliases</h3>
+
+			<p>Need to reference one bit of content from another? Want to include a list of features or favorites on your homepage? Easy.</p>
+
+			<p>Spontaneous’s alias system lets you create links to any bit of content on your site. Define your alias type in the schema (in Ruby as usual) and editors are presented with a dialogue that lets them pick the item they want to link to. The alias then has access to all their targets fields and templates as well has being able to have their own.</p>
+
+			<script src="https://gist.github.com/4594056.js"></script>
+
+			<p>These aliases are like symbolic links in UNIX speak and are one of the most powerful aspects of Spontaneous’s type system. Although Spontaneous has no concept of a "media library" where commonly used images or files are kept, you can easily create an equivalent system using aliases. In fact you can create multiple simultaneous libraries, each with its own content logic.</p>
+			<div class="figure">
+				<p class="image">
+				<a href="figures/screenshot-alias-picker.png" class="zoom"><img src="figures/screenshot-alias-picker.thumb.png" alt="" /></a>
+				</p>
+				<div class="caption">
+					<h4>Picking a Target for Your Alias</h4>
+					<p>The alias picker interface allows you to search for the target you want. The Ruby API provides flexible options for filtering including limiting to a sub-set of content types, selecting only from a single page, single box or even a completely custom list (such as rows from an external database).</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+
+			<p>Example uses (taken from actual projects) include:</p>
+
+			<ul>
+				<li>
+				<strong>Create custom showreels.</strong> Film-makers often want to present a very specific sub-set of their oeuvre to present to a prospective client. Using aliases this is easy. <a href="http://prechezer.com/commercials">Example</a>
+				</li>
+				<li>
+				<strong>Promote content on your homepage.</strong> Like the example above, you can create any number of links within a page. <a href="http://soda.co.uk">Example</a>
+				</li>
+				<li>
+				<strong>Create category systems.</strong> Because each item knows about all the aliases that point to it, you can use aliases to categorize content and then present visitors with a list of all members of that category <code>members = category.aliases.map(&amp;:page)</code>. Like every other page these category pages are generated as part of the publishing step and will be served lighting fast to your site visitors. <a href="http://kitmonsters.com/kit/guitar">Example</a>
+				</li>
+			</ul>
+
+			<h3>A Content Management <em>Framework</em>?</h3>
+
+			<p>Spontaneous is as much a framework as a CMS. It’s schema system, backed by a solid relational database, is as much like coding an app as a content hierarchy.</p>
+
+			<p>Each content model can also provide its own set of controllers if you want to provide some dynamic functionality to a page. For example if you wanted to allow users to posts comments on each blog page you could add a comments controller:</p>
+
+			<script src="https://gist.github.com/4587957.js"></script>
+
+			<p>If the page at <code>/blog/my-first-post</code> is a <code>BlogPost</code> page then GET-ing  the URL <code>/blog/my-first-post/@comments</code> will return the list of comments and POST-ing to <code>/blog/my-first-post/@comments/like/23</code> will like post with ID 23.</p>
 
 			<h3>Version 3…</h3>
 
@@ -73,180 +254,6 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-
-			<p>
-			The following is a quick tour of the features that make Spontaneous the best CMS in the world.
-			</p>
-
-			<h3>Metadata in Code, Not the Database</h3>
-
-			<p>
-			Spontaneous is highly structured. You build a site by writing Ruby classes that define content types and the relations between them much like you would between tables in a database.
-			</p>
-
-			<p>In Spontaneous this collection of Ruby classes is called the ‘schema’. It is what makes the system as a whole so powerful and flexible.</p>
-
-			<script src="https://gist.github.com/4587221.js"></script>
-
-			<div class="figure">
-				<p class="image">
-				<a href="figures/screenshot-basic-editing.png" class="zoom"><img src="figures/screenshot-basic-editing.thumb.png" alt="" /></a>
-				</p>
-				<div class="caption">
-					<h4>The schema above generates this editing interface.</h4>
-					<p>At the top is a navigation and toolbar. Below that is the page information, its title and URL. Then the page’s fields, in this case it’s title, welcome text and image. Next is the list of ‘boxes’ which are where you build the page content and children. Each box has a list of content types that it accepts, in this simple example we have only allowed the addition of ‘Blog Section’ pages.</p>
-				</div>
-				<div class="clear"></div>
-			</div>
-
-
-			<h3>Cutting Edge User Interface</h3>
-
-			<p>Instead of relying on a WYSIWYG editor and placing the burden of layout on the content editor, Spontaneous instead has a content model based on multiple lists of simple content “pieces”.</p>
-
-			<p>Defined within the schema, each site can have as many content types as necessary and each can have as many ‘fields’ as needed. These fields are laid out within templates coded by the developer.  </p>
-
-			<p>By adding a piece of content and filling in its fields with text and images, editors are adding a beautifully and consistently styled element to their web-page without having to even think about layout.</p>
-
-			<p>Spontaneous uses feature detection to ensure that only the most capable browsers are able to access the editing interface. This means that it is free to lay on a rich layer of cutting-edge HTML5 features to make the editing experience as pleasant as possible:</p>
-
-			<ul>
-				<li>
-					<strong>A perfect preview.</strong> The preview mode shows you the site exactly as it will appear once any changes are published. There is no CMS specific code inserted that might alter the way the page looks or behaves. The preview is identical right down to the HTML (barring certain desirable exceptions such as analytics tracking code).
-				</li>
-				<li>
-				<strong>Clean, clear, attractive and uncluttered design.</strong> It’s all about removing buttons, not adding them.
-			<div class="figure">
-				<p class="image">
-				<a href="figures/screenshot-basic-editing.png" class="zoom"><img src="figures/screenshot-basic-editing.thumb.png" alt="" /></a>
-				</p>
-				<div class="caption">
-					<h4>Nothing Between You and Your Site</h4>
-					<p>Spontaneous’s way of breaking complex pages down into simple pieces means that content composition is a series of simple steps. Because almost everything about the site is specific to the requirements of that site there is no need for lots of generic buttons, pulldowns and choices. The only text in this screenshot that wasn’t decided by the site’s developer are the words ‘publish’ and ‘preview’...</p>
-				</div>
-				<div class="clear"></div>
-			</div>
-				</li>
-				<li>
-				<strong>Simple actions leading to predictable outcomes.</strong> WYSIWYG is a lie. Reliability and predicitability are worth more than a live preview.
-				</li>
-				<li>
-				<strong>Sophisticated context-sensitive Markdown editor.</strong> Because layout is handled by the CMS through templates, the text editor is only needed to add simple text styles.
-			<div class="figure">
-				<p class="image">
-				<a href="figures/screenshot-markdown-editor.png" class="zoom"><img src="figures/screenshot-markdown-editor.thumb.png" alt="" /></a>
-				</p>
-				<div class="caption">
-					<h4>Smart Editing</h4>
-					<p>Markdown is perfect for basic styling of text and Spontaneous’s editor is perfect for Markdown. It is smart enough to know when your cursor is within a bold, italic, headline or link section so allows you to edit or toggle these styles without having to painstakingly re-select the marked text. It’s also smart enough to translate ‘@spontaneouscms’ into a link to the <a href="https://twitter.com/spontaneouscms">relevant Twitter profile</a>.</p>
-
-				</div>
-				<div class="clear"></div>
-			</div>
-				</li>
-				<li>
-				<strong>Resumable and verified uploads.</strong> Large files are uploaded in pieces. Each piece has its integrity verified using a SHA checksum and the final file is reassembled from these pieces.
-				<p><span class="strike">If</span> When you lose internet connectivity or your browser crashes half-way uploading a 700Mb video over your rural ADSL connection<sup>*</sup> Spontaneous will re-use nearly all the data you uploaded the next time you try.</p>
-				<p>
-				<sup>*</sup> A real situation.
-				</p>
-				<div class="figure">
-				<p class="image">
-				<a href="figures/screenshot-image-upload.png" class="zoom"><img src="figures/screenshot-image-upload.thumb.png" alt="" /></a>
-				</p>
-				<div class="caption">
-					<h4>Drag &amp; Drop Uploading</h4>
-					<p>Simply drop a file onto an image preview to upload it — you will be rewarded with an accurate progress meter. Multiple files will be queued and uploaded one at a time and are processed asynchronously on the server so you can carry on editing whilst your images are processed (and perhaps uploaded to the cloud).</p>
-
-				</div>
-				<div class="clear"></div>
-			</div>
-				</li>
-				<li>
-				<strong>Publishing progress indicator.</strong> Watch your changes go live in real time.
-				<div class="figure">
-					<p class="image">
-					<a href="figures/screenshot-publish-progress.png" class="zoom"><img src="figures/screenshot-publish-progress.thumb.png" alt="" /></a>
-					</p>
-					<div class="caption">
-						<h4>Worth the (Short) Wait</h4>
-						<p>The separate publishing step transforms your changes into static pages<sup>*</sup> and indexes the site. This is run in the background using a low-priority process so that it doesn’t affect the performance of the site but you recieve progress updates in real time.</p>
-
-						<p>
-						<sup>*</sup> Unless they contain some dynamic component.
-						</p>
-					</div>
-					<div class="clear"></div>
-				</div>
-				</li>
-			</ul>
-
-			<h3>Multiple outputs</h3>
-
-			<p>HTML is no longer enough. </p>
-
-
-
-			<p>Each page type in the Spontaneous schema can declare multiple outputs. Starting with a default HTML view you can add any number &amp; mix of alternate HTML, XML based syndication feeds, JSON and plain text versions. This means your content is available in the browser but also in that native mobile application you want to provide. In future the aim is to extend this system to support more complex formats such as PDF, MOBI and EPUB (to name but a few).</p>
-
-<script src="https://gist.github.com/4605834.js"></script>
-
-			<p>You can also define your own outputs such as one that inserts rows in a database, or communicates with an external service so they can also form a part of integrating Spontaneous into a larger system.</p>
-
-			<h3>Powerful Search</h3>
-
-			<p>Built in to the CMS and configured within the content schema is a powerful search system based upon <a href="http://xapian.org/">Xapian</a>.</p>
-
-			<p>Each Spontaneous site can have multiple search indexes encompassing a subset of content types.</p>
-
-			<p>
-			<script src="https://gist.github.com/4587894.js"></script>
-			</p>
-
-			<h3>Content Aliases</h3>
-
-			<p>Need to reference one bit of content from another? Want to include a list of features or favorites on your homepage? Easy.</p>
-
-			<p>Spontaneous’s alias system lets you create links to any bit of content on your site. Define your alias type in the schema (in Ruby as usual) and editors are presented with a dialogue that lets them pick the item they want to link to. The alias then has access to all their targets fields and templates as well has being able to have their own.</p>
-
-			<script src="https://gist.github.com/4594056.js"></script>
-
-			<p>These aliases are like symbolic links in UNIX speak and are one of the most powerful aspects of Spontaneous’s type system. Although Spontaneous has no concept of a "media library" where commonly used images or files are kept, you can easily create an equivalent system using aliases. In fact you can create multiple simultaneous libraries, each with its own content logic.</p>
-				<div class="figure">
-					<p class="image">
-					<a href="figures/screenshot-alias-picker.png" class="zoom"><img src="figures/screenshot-alias-picker.thumb.png" alt="" /></a>
-					</p>
-					<div class="caption">
-						<h4>Picking a Target for Your Alias</h4>
-						<p>The alias picker interface allows you to search for the target you want. The Ruby API provides flexible options for filtering including limiting to a sub-set of content types, selecting only from a single page, single box or even a completely custom list (such as rows from an external database).</p>
-					</div>
-					<div class="clear"></div>
-				</div>
-
-			<p>Example uses (taken from actual projects) include:</p>
-
-			<ul>
-				<li>
-				<strong>Create custom showreels.</strong> Film-makers often want to present a very specific sub-set of their oeuvre to present to a prospective client. Using aliases this is easy. <a href="http://prechezer.com/commercials">Example</a>
-				</li>
-				<li>
-				<strong>Promote content on your homepage.</strong> Like the example above, you can create any number of links within a page. <a href="http://soda.co.uk">Example</a>
-				</li>
-				<li>
-				<strong>Create category systems.</strong> Because each item knows about all the aliases that point to it, you can use aliases to categorize content and then present visitors with a list of all members of that category <code>members = category.aliases.map(&amp;:page)</code>. Like every other page these category pages are generated as part of the publishing step and will be served lighting fast to your site visitors. <a href="http://kitmonsters.com/kit/guitar">Example</a>
-				</li>
-			</ul>
-
-			<h3>A Content Management <em>Framework</em>?</h3>
-
-			<p>Spontaneous is as much a framework as a CMS. It’s schema system, backed by a solid relational database, is as much like coding an app as a content hierarchy.</p>
-
-			<p>Each content model can also provide its own set of controllers if you want to provide some dynamic functionality to a page. For example if you wanted to allow users to posts comments on each blog page you could add a comments controller:</p>
-
-			<script src="https://gist.github.com/4587957.js"></script>
-
-			<p>If the page at <code>/blog/my-first-post</code> is a <code>BlogPost</code> page then GET-ing  the URL <code>/blog/my-first-post/@comments</code> will return the list of comments and POST-ing to <code>/blog/my-first-post/@comments/like/23</code> will like post with ID 23.</p>
-
 			<h3>And More...</h3>
 
 
@@ -311,9 +318,9 @@
 
 			<h3>Get Involved</h3>
 			<p>If you’d like to contribute to Spontaneous’s development then head over to the <a href="https://github.com/SpontaneousCMS/spontaneous">Github page</a>. Spontaneous is currently the work of a <a href="https://github.com/SpontaneousCMS/spontaneous/graphs/contributors">single developer</a>. Any help greatly appreciated.</p>
-			</div>
-			<a href="https://github.com/SpontaneousCMS/spontaneous"><img style="position: absolute; top: 0; right: 0; border: 0;" src="forkme_right_white_FF6C03.png" alt="Fork me on GitHub"></a>
+		</div>
+		<a href="https://github.com/SpontaneousCMS/spontaneous"><img style="position: absolute; top: 0; right: 0; border: 0;" src="img/forkme_right_white_FF6C03.png" alt="Fork me on GitHub"></a>
 		<script type="text/javascript" src="js/FancyZoom.js" async></script>
 		<script type="text/javascript" src="js/FancyZoomHTML.js" async></script>
-		</body>
-	</html>
+	</body>
+</html>

@@ -1,0 +1,8 @@
+safe: true
+lsi: false
+include:
+- _static
+- _templates
+pygments: true
+frontpage_posts: 4
+

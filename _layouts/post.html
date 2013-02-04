@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>{{ page.title }}</title>
+		<link rel="stylesheet" href="/css/post.css" />
+	</head>
+	<body>
+		<div id="contents">
+			<div id="main">
+				{{ content }}
+			</div>
+			<div id="side">
+				<ul class="posts">
+					{% for post in site.posts offset:{{site.frontpage_posts}} limit:8 %}
+					<li>
+					<span>
+						{{ post.date | date_to_string }}
+					</span> &raquo;
+					<a href="{{ post.url }}">{{ post.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

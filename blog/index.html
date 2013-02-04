@@ -1,0 +1,10 @@
+---
+layout: blog
+---
+{% for post in site.posts limit:{{site.frontpage_posts}} %}
+<a href="{{ post.url }}">{{ post.title }}</a>
+<time class="date" datetime="{{ post.date | date: "%Y-%m-%d" }}">
+{{ post.date | date: "<em>%d</em><small>%b<br/>%Y</small>" }}
+</time>
+{{ post.content }}
+{% endfor %}

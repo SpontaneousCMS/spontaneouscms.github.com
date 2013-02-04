@@ -1,0 +1,131 @@
+@import "include";
+
+body {
+	font-family: 'Adelle', 'News Cycle', sans-serif;
+	font-weight: 100;
+	/* font-style: italic; */
+
+	background-color: #0B659B;
+	margin: 0;
+	padding: 0;
+	background-image: -webkit-linear-gradient(-90deg, rgba(0,0,0,0.12) 0%, rgba(255,255,255,0.00) 400px);
+	background-repeat: no-repeat;
+	-webkit-font-smoothing: antialiased;
+	color: rgb(145, 216, 255);
+	/* color: #78C4EE; */
+	font-size: 18px;
+	line-height: 24px;
+}
+
+html {
+	height: 100%;
+}
+
+a {
+	color: #fff;
+}
+a:hover {
+	color: #15384D;
+}
+.clear { clear: both; }
+
+#contents {
+	width: 980px;
+	margin: 0 auto;
+	padding-bottom: 20%;
+}
+.hero,
+.note,
+.figure,
+code {
+	background: rgba(0, 0, 0, 0.1);
+}
+.hero,
+.note {
+	padding: 1em;
+}
+.note {
+	font-size: 0.9em;
+	line-height: 1.3em;
+}
+.text {
+	width: 760px;
+}
+.figure {
+	padding: 10px 20px;
+	font-size: 0.95em;
+}
+.figure p {
+}
+.caption {
+	width: 720px;
+}
+.caption h4 {
+	margin: 0;
+	font-weight: normal;
+	font-size: 1em;
+	color: #fff;
+}
+.caption p {
+}
+.figure .image {
+	margin: 0;
+	width: 200px;
+	color: #000;
+	float: left;
+}
+.figure .caption {
+	float:left;
+	margin-left: 20px;
+}
+ul li .figure {
+	margin: 1em 0;
+}
+ul li .caption {
+	width: 700px;
+}
+pre,
+.gist {
+	font-size: 12px;
+}
+sup {
+	color: #fff;
+	vertical-align: baseline;
+	position: relative;
+	top: -7px;
+	margin: 0 2px;
+}
+
+h2,
+h3 {
+	color: #fff;
+	font-weight: normal;
+}
+h3 {
+}
+strong {
+	color: #fff;
+	font-weight: normal;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+ul li {
+	margin-left: 0px;
+	padding-left: 0px;
+	position: relative;
+}
+ul li:before {
+	position: absolute;
+	left: -20px;
+	top: 0;
+	content: "\276F";
+}
+ul li + li {
+	margin-top: 10px;
+}
+.strike {
+	text-decoration: line-through;
+}
