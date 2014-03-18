@@ -42,6 +42,38 @@ necessary databases and database tables::
 
     $ spot init
 
+.. warning::
+    **Postgres users** my have to set up their access permissions first. If you
+    are logged in as the user 'fred' then Spontaneous's generator will have
+    created a default ``config/database.yml`` set to access the database
+    with the same username as your login account. Before running ``spot init``
+    try connecting to the database as yourself:
+
+    .. code::
+
+      [fred ~]$ psql postgres
+
+    If this doesn't work then you'll need to do a couple of extra steps.
+    As root:
+
+    .. code::
+
+        [root ~]$ su - postgres
+        [postgres ~]$ createuser --createdb --no-password fred
+        [postgres ~]$ exit
+
+    The ``--no-password`` is optional but if you give the user a password
+    be sure to update your ``config/database.yml`` to match.
+
+    Now you should be able to connect as yourself:
+
+    .. code::
+
+        [fred ~]$ psql postgres
+
+    and ``spot init`` should run.
+
+
 As part of the initialization you will be asked for some details in order to
 create a root-level user for the site. If possible details will be taken
 from your git config (name & email address).
@@ -512,6 +544,13 @@ Page URLs
 
 You can also see the page's URL path, in this case ``/dauphinoise-potatoes``. This
 has been automatically taken from the page's title.
+
+.. note::
+    Pages are added with a default 'slug' that is auto generated in order to avoid
+    collisions. The default format is ``"page-#{Time.now.strftime('%Y%m%d-%H%M%S')}"``
+    which will generate for example ``page-20140313-141012``. Once you set the title
+    field of the page this default slug will be overridden by one generated from the
+    given title.
 
 These paths define the public URL of the page. So if our new recipes site is
 hosted at 'spontaneous-recipes.com' the full URL of our new Dauphinoise Potatoes

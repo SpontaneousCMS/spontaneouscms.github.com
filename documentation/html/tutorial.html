@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -14,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -83,6 +82,31 @@ take a minute or so):</p>
 necessary databases and database tables:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>spot init
 </pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Postgres users</strong> my have to set up their access permissions first. If you
+are logged in as the user &#8216;fred&#8217; then Spontaneous&#8217;s generator will have
+created a default <tt class="docutils literal"><span class="pre">config/database.yml</span></tt> set to access the database
+with the same username as your login account. Before running <tt class="docutils literal"><span class="pre">spot</span> <span class="pre">init</span></tt>
+try connecting to the database as yourself:</p>
+<div class="code highlight-bash"><div class="highlight"><pre><span class="o">[</span>fred ~<span class="o">]</span><span class="nv">$ </span>psql postgres
+</pre></div>
+</div>
+<p>If this doesn&#8217;t work then you&#8217;ll need to do a couple of extra steps.
+As root:</p>
+<div class="code highlight-bash"><div class="highlight"><pre><span class="o">[</span>root ~<span class="o">]</span><span class="nv">$ </span>su - postgres
+<span class="o">[</span>postgres ~<span class="o">]</span><span class="nv">$ </span>createuser --createdb --no-password fred
+<span class="o">[</span>postgres ~<span class="o">]</span><span class="nv">$ </span><span class="nb">exit</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">--no-password</span></tt> is optional but if you give the user a password
+be sure to update your <tt class="docutils literal"><span class="pre">config/database.yml</span></tt> to match.</p>
+<p>Now you should be able to connect as yourself:</p>
+<div class="code highlight-bash"><div class="highlight"><pre><span class="o">[</span>fred ~<span class="o">]</span><span class="nv">$ </span>psql postgres
+</pre></div>
+</div>
+<p class="last">and <tt class="docutils literal"><span class="pre">spot</span> <span class="pre">init</span></tt> should run.</p>
 </div>
 <p>As part of the initialization you will be asked for some details in order to
 create a root-level user for the site. If possible details will be taken
@@ -163,14 +187,14 @@ in the details later.</p>
 is &lt;<a class="reference external" href="http://127.0.0.1:2011">http://127.0.0.1:2011</a>&gt;.</p>
 <p>Open your browser and navigate to &lt;<a class="reference external" href="http://127.0.0.1:2011/&#64;spontaneous">http://127.0.0.1:2011/&#64;spontaneous</a>&gt;. You
 should see something that looks like this:</p>
-<img alt="Add homepage dialogue" src="../../figures/tutorial/screenshot-add-homepage-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-add-homepage-1.png"><img alt="Add homepage dialogue" src="../../figures/tutorial/screenshot-add-homepage-1.png" style="width: 50%;" /></a>
 <p>In order to start building your site, you need to choose a content type that
 will be used for the site homepage.</p>
 <p>Select the &#8220;Homepage&#8221; entry in this dialogue:</p>
-<img alt="Add homepage dialogue with content type selected" src="../../figures/tutorial/screenshot-add-homepage-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-add-homepage-2.png"><img alt="Add homepage dialogue with content type selected" src="../../figures/tutorial/screenshot-add-homepage-2.png" style="width: 50%;" /></a>
 <p>And then click &#8220;Create&#8221;.</p>
 <p>Once that&#8217;s done you should see something like this:</p>
-<img alt="Editing screen for our new site homepage" src="../../figures/tutorial/screenshot-edit-homepage-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-1.png"><img alt="Editing screen for our new site homepage" src="../../figures/tutorial/screenshot-edit-homepage-1.png" style="width: 50%;" /></a>
 <p>What you&#8217;re seeing is the editing view of your new site homepage.</p>
 <p>It has a &#8216;title&#8217; field and below that you can see the &#8216;recipes&#8217; box we defined
 above.</p>
@@ -179,7 +203,7 @@ to add things to our homepage. Because the only thing we&#8217;ve &#8216;allowed
 added to our recipes box are instances of the <tt class="docutils literal"><span class="pre">Recipe</span></tt> type, we only have this
 one button.</p>
 <p>Go ahead and click the &#8220;Recipe&#8221; button to add a <tt class="docutils literal"><span class="pre">Recipe</span></tt> instance to our box:</p>
-<img alt="Adding a recipe page" src="../../figures/tutorial/screenshot-edit-homepage-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-2.png"><img alt="Adding a recipe page" src="../../figures/tutorial/screenshot-edit-homepage-2.png" style="width: 50%;" /></a>
 <p>A new <tt class="docutils literal"><span class="pre">Recipe</span></tt> instance will appear with its title field open for editing.
 Choose a title for your recipe, &#8220;Mashed Potatoes&#8221; in this case and hit save.</p>
 <div class="admonition note">
@@ -188,7 +212,7 @@ Choose a title for your recipe, &#8220;Mashed Potatoes&#8221; in this case and h
 type Ctrl-S or (on a Mac) Cmd-S &#8211; Spontaneous tries to make
 everything as natural as possible.</p>
 </div>
-<img alt="The new recipe page" src="../../figures/tutorial/screenshot-edit-homepage-3.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-3.png"><img alt="The new recipe page" src="../../figures/tutorial/screenshot-edit-homepage-3.png" style="width: 50%;" /></a>
 <p>If you move the mouse just below the recipe we&#8217;ve just added you should see a
 button appear identical to the one we just clicked. This button allows you to
 add a recipe below the one we&#8217;ve just added. Boxes allow you to add items
@@ -200,7 +224,7 @@ right position.</p>
 <p>There, we&#8217;ve created our homepage and some recipes.</p>
 <p>These recipes aren&#8217;t very interesting or useful though. To improve the situation
 we need to expand the definition of the <tt class="docutils literal"><span class="pre">Recipe</span></tt> type.</p>
-<img alt="Multiple recipes in the recipe box" src="../../figures/tutorial/screenshot-edit-homepage-4.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-4.png"><img alt="Multiple recipes in the recipe box" src="../../figures/tutorial/screenshot-edit-homepage-4.png" style="width: 50%;" /></a>
 </div>
 <div class="section" id="defining-editable-fields">
 <h3>Defining Editable Fields<a class="headerlink" href="#defining-editable-fields" title="Permalink to this headline">¶</a></h3>
@@ -224,15 +248,15 @@ templates (see later) and also the name that will show up in the editing
 interface.</p>
 <p>If you hit &#8216;reload&#8217; in your browser Spontaneous will reload your schema code
 and your site homepage should look something like this:</p>
-<img alt="The new Recipe 'description' and 'photo' fields" src="../../figures/tutorial/screenshot-edit-homepage-5.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-5.png"><img alt="The new Recipe 'description' and 'photo' fields" src="../../figures/tutorial/screenshot-edit-homepage-5.png" style="width: 50%;" /></a>
 <p>If you wanted to use a different name for the field in the user interface, you
 would pass a value for <tt class="docutils literal"><span class="pre">title</span></tt> in the field options:</p>
-<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;A short description&quot;</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;A short description&quot;</span>
 </pre></div>
 </div>
 <p>This would change the name of the field in the user interface to &#8220;A short
 description&#8221; but the internal name of the field would still be &#8220;description&#8221;.</p>
-<img alt="Renaming the 'description' field" src="../../figures/tutorial/screenshot-edit-homepage-6.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-6.png"><img alt="Renaming the 'description' field" src="../../figures/tutorial/screenshot-edit-homepage-6.png" style="width: 50%;" /></a>
 <p>The second parameter to the field definition is the field type. The basic field
 types are <tt class="docutils literal"><span class="pre">:string</span></tt>, <tt class="docutils literal"><span class="pre">:text</span></tt> and <tt class="docutils literal"><span class="pre">:image</span></tt> (though there are more see
 <a class="reference internal" href="schema/fields.html#schema-field-types"><em>Field Types</em></a>).</p>
@@ -298,7 +322,7 @@ defined. How come?</p>
 have generated for you. It will look something like this:</p>
 <div class="highlight-ruby"><div class="highlight"><pre><span class="kp">include</span> <span class="s1">&#39;content&#39;</span>
 
-<span class="k">class</span> <span class="nc">Page</span> <span class="o">&lt;</span> <span class="no">Content</span><span class="o">::</span><span class="no">Page</span>
+<span class="k">class</span> <span class="nc">Page</span> <span class="o">&lt;</span> <span class="ss">Content</span><span class="p">:</span><span class="ss">:Page</span>
   <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s2">&quot;New Page&quot;</span>
 <span class="k">end</span>
 </pre></div>
@@ -324,14 +348,14 @@ to something more appropriate:</p>
 <span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
   <span class="c1"># we can drop the type for the `title` field</span>
   <span class="c1"># because the default is :string</span>
-  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="n">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
+  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="ss">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
   <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
   <span class="n">field</span> <span class="ss">:photo</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 <p>Now, when we add a recipe we are presented with this:</p>
-<img alt="The new default title value" src="../../figures/tutorial/screenshot-edit-homepage-7.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-7.png"><img alt="The new default title value" src="../../figures/tutorial/screenshot-edit-homepage-7.png" style="width: 50%;" /></a>
 <p>For more details on defining fields see <a class="reference internal" href="schema/fields.html#schema-fields"><em>Fields</em></a>.</p>
 <p>Now we have the fields defined for our Recipe type, but what about the
 ingredients and instructions? For that we need to learn how to use the next most
@@ -357,7 +381,7 @@ do this within our <tt class="docutils literal"><span class="pre">schema/recipe.
 <span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
   <span class="c1"># we can drop the type for the `title` field</span>
   <span class="c1"># because the default is :string</span>
-  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="n">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
+  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="ss">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
   <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
   <span class="n">field</span> <span class="ss">:photo</span>
 
@@ -390,7 +414,7 @@ instructions:</p>
 <span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
   <span class="c1"># we can drop the type for the `title` field</span>
   <span class="c1"># because the default is :string</span>
-  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="n">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
+  <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="ss">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
   <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
   <span class="n">field</span> <span class="ss">:photo</span>
 
@@ -411,7 +435,7 @@ instructions:</p>
 <span class="c1"># Step entries are added to the &quot;instructions&quot; box within our Recipe</span>
 <span class="k">class</span> <span class="nc">Step</span> <span class="o">&lt;</span> <span class="no">Piece</span>
   <span class="n">field</span> <span class="ss">:instructions</span><span class="p">,</span> <span class="ss">:text</span>
-  <span class="n">field</span> <span class="ss">:photo</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="s2">&quot;Optional&quot;</span>
+  <span class="n">field</span> <span class="ss">:photo</span><span class="p">,</span> <span class="ss">comment</span><span class="p">:</span> <span class="s2">&quot;Optional&quot;</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -431,29 +455,37 @@ they don&#8217;t have to have a photo for each step.</p>
 <p>To do that we first need to navigate to one of the recipe pages within the CMS.</p>
 <p>There are two ways to do this:</p>
 <p>By clicking on the recipe title in the &#8216;Recipes&#8217; box:</p>
-<img alt="Navigating to a Recipe page using its title" src="../../figures/tutorial/screenshot-edit-navigation-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-navigation-1.png"><img alt="Navigating to a Recipe page using its title" src="../../figures/tutorial/screenshot-edit-navigation-1.png" style="width: 50%;" /></a>
 <p>or choosing the page from the pulldown in the navigation bar:</p>
-<img alt="Navigating to a Recipe page using the site browser" src="../../figures/tutorial/screenshot-edit-navigation-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-navigation-2.png"><img alt="Navigating to a Recipe page using the site browser" src="../../figures/tutorial/screenshot-edit-navigation-2.png" style="width: 50%;" /></a>
 <p>Once there you will see the editor for our <tt class="docutils literal"><span class="pre">Recipe</span></tt> page with the
 &#8220;Ingredients&#8221; and &#8220;Instructions&#8221; boxes we defined in the schema:</p>
-<img alt="Editing a Recipe page" src="../../figures/tutorial/screenshot-edit-recipe-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-recipe-1.png"><img alt="Editing a Recipe page" src="../../figures/tutorial/screenshot-edit-recipe-1.png" style="width: 50%;" /></a>
 </div>
 <div class="section" id="page-urls">
 <h3>Page URLs<a class="headerlink" href="#page-urls" title="Permalink to this headline">¶</a></h3>
 <p>You can also see the page&#8217;s URL path, in this case <tt class="docutils literal"><span class="pre">/dauphinoise-potatoes</span></tt>. This
 has been automatically taken from the page&#8217;s title.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Pages are added with a default &#8216;slug&#8217; that is auto generated in order to avoid
+collisions. The default format is <tt class="docutils literal"><span class="pre">&quot;page-#{Time.now.strftime('%Y%m%d-%H%M%S')}&quot;</span></tt>
+which will generate for example <tt class="docutils literal"><span class="pre">page-20140313-141012</span></tt>. Once you set the title
+field of the page this default slug will be overridden by one generated from the
+given title.</p>
+</div>
 <p>These paths define the public URL of the page. So if our new recipes site is
 hosted at &#8216;spontaneous-recipes.com&#8217; the full URL of our new Dauphinoise Potatoes
 recipe will be <tt class="docutils literal"><span class="pre">http://spontaneous-recipes.com/dauphinoise-potatoes</span></tt>.</p>
 <p>If you don&#8217;t like a page&#8217;s URL then to change it simply click on it and you&#8217;ll
 be presented with a text input:</p>
-<img alt="Changing a page's URL" src="../../figures/tutorial/screenshot-edit-recipe-path-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-recipe-path-1.png"><img alt="Changing a page's URL" src="../../figures/tutorial/screenshot-edit-recipe-path-1.png" style="width: 50%;" /></a>
 <p>This is a special editor that will automatically convert your typing into URL
 safe characters: spaces and other punctuation will be converted to dashes and
 all text will be made lower case.</p>
 <p>The editor will also warn you if your new path is invalid or a duplicate (having
 two pages with the same path would stop one of them from being visible).</p>
-<img alt="Warning for a duplicate URL" src="../../figures/tutorial/screenshot-edit-recipe-path-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-recipe-path-2.png"><img alt="Warning for a duplicate URL" src="../../figures/tutorial/screenshot-edit-recipe-path-2.png" style="width: 50%;" /></a>
 </div>
 <div class="section" id="building-the-page">
 <h3>Building the Page<a class="headerlink" href="#building-the-page" title="Permalink to this headline">¶</a></h3>
@@ -466,17 +498,17 @@ or</li>
 <li>Drag a file from your desktop of file browser and drop it onto the grey photo
 placeholder.</li>
 </ol>
-<img alt="Adding the page's description &amp; photo" src="../../figures/tutorial/screenshot-edit-recipe-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-recipe-2.png"><img alt="Adding the page's description &amp; photo" src="../../figures/tutorial/screenshot-edit-recipe-2.png" style="width: 50%;" /></a>
 <p>Once you&#8217;re happy with the page&#8217;s description &amp; image save the fields (using the
 save button, Ctrl-S or Cmd-S).</p>
 <p>Now we want to add our ingredients by going to the &#8220;Ingredients&#8221; box and
 clicking the add &#8220;Ingredient&#8221; button. To add the ingredients in order, use the
 add ingredient button that appears below the last ingredient in the list.</p>
-<img alt="Adding an ingredient at the bottom of the list" src="../../figures/tutorial/screenshot-edit-recipe-ingredients-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-recipe-ingredients-1.png"><img alt="Adding an ingredient at the bottom of the list" src="../../figures/tutorial/screenshot-edit-recipe-ingredients-1.png" style="width: 50%;" /></a>
 <p>As you add each ingredient fill in the &#8220;Name&#8221; &amp; &#8220;Quantity&#8221; fields appropriately.</p>
-<img alt="The final list of ingredients" src="../../figures/tutorial/screenshot-edit-recipe-ingredients-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-recipe-ingredients-2.png"><img alt="The final list of ingredients" src="../../figures/tutorial/screenshot-edit-recipe-ingredients-2.png" style="width: 50%;" /></a>
 <p>Do the same for the Instructions box:</p>
-<img alt="Our list of instructions" src="../../figures/tutorial/screenshot-edit-recipe-instructions-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-recipe-instructions-1.png"><img alt="Our list of instructions" src="../../figures/tutorial/screenshot-edit-recipe-instructions-1.png" style="width: 50%;" /></a>
 <p>That&#8217;s it. Our recipe content is complete.</p>
 </div>
 </div>
@@ -484,7 +516,7 @@ add ingredient button that appears below the last ingredient in the list.</p>
 <h2>Create HTML Templates<a class="headerlink" href="#create-html-templates" title="Permalink to this headline">¶</a></h2>
 <p>Now that we&#8217;ve finished editing let&#8217;s see how our site will look like to
 visitors:</p>
-<img alt="A first preview of our site" src="../../figures/tutorial/screenshot-template-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-template-1.png"><img alt="A first preview of our site" src="../../figures/tutorial/screenshot-template-1.png" style="width: 50%;" /></a>
 <p>Oh. Not very good. What we&#8217;re seeing is Spontaneous&#8217;s default page template
 simply dumping the values of your fields.</p>
 <div class="section" id="layouts">
@@ -546,7 +578,7 @@ way to having a working recipe page.</p>
 </pre></div>
 </div>
 <p>If we reload our site preview it should look like this:</p>
-<img alt="Our ingredient list coming together" src="../../figures/tutorial/screenshot-template-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-template-2.png"><img alt="Our ingredient list coming together" src="../../figures/tutorial/screenshot-template-2.png" style="width: 50%;" /></a>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You can preview your new page without having the CMS navigation bar
@@ -562,7 +594,7 @@ our ingredient list is complete.</p>
 <span class="nt">&lt;/li&gt;</span>
 </pre></div>
 </div>
-<img alt="The complete ingredients list" src="../../figures/tutorial/screenshot-template-3.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-template-3.png"><img alt="The complete ingredients list" src="../../figures/tutorial/screenshot-template-3.png" style="width: 50%;" /></a>
 <p>Now onto the instructions.</p>
 <p>Create the file <tt class="docutils literal"><span class="pre">templates/recipe/instructions.html.cut</span></tt> with the following
 markup:</p>
@@ -587,7 +619,7 @@ instructions are composed of a series of <tt class="docutils literal"><span clas
 </pre></div>
 </div>
 <p>Now we have our recipe in all its glory:</p>
-<img alt="Our final page with ingredients and instructions" src="../../figures/tutorial/screenshot-template-4.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-template-4.png"><img alt="Our final page with ingredients and instructions" src="../../figures/tutorial/screenshot-template-4.png" style="width: 50%;" /></a>
 <p>Now we&#8217;re ready to make our site live.</p>
 </div>
 </div>
@@ -596,7 +628,7 @@ instructions are composed of a series of <tt class="docutils literal"><span clas
 <p>Clicking on the &#8220;Publish&#8221; button at the top right will bring up a list of pages
 that have been modified and need publishing. Because we have never published our
 site this list shows every page we have created:</p>
-<img alt="The list of pages to publish" src="../../figures/tutorial/screenshot-publishing-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-publishing-1.png"><img alt="The list of pages to publish" src="../../figures/tutorial/screenshot-publishing-1.png" style="width: 50%;" /></a>
 <p>Click on the &#8220;Publish&#8221; button at the bottom right and your site will be
 published and rendered.</p>
 <p>If you want to see your published site visit <a class="reference external" href="http://127.0.0.1:2012">http://127.0.0.1:2012</a> &#8212; there
@@ -611,7 +643,7 @@ a couple of other things we can do though.</p>
 <h3>Deleting Things<a class="headerlink" href="#deleting-things" title="Permalink to this headline">¶</a></h3>
 <p>If you want to delete something from a box then click on the delete icon that
 you&#8217;ll see at the right of every entry in a box.</p>
-<img alt="Deleting an item" src="../../figures/tutorial/screenshot-deleting-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-deleting-1.png"><img alt="Deleting an item" src="../../figures/tutorial/screenshot-deleting-1.png" style="width: 50%;" /></a>
 </div>
 <div class="section" id="hiding-things">
 <h3>Hiding Things<a class="headerlink" href="#hiding-things" title="Permalink to this headline">¶</a></h3>
@@ -636,18 +668,18 @@ to display itself inline within a page. When accessed directly recipes use the
 </pre></div>
 </div>
 <p>Now our homepage preview will look something like this:</p>
-<img alt="Our new homepage with recipes" src="../../figures/tutorial/screenshot-hiding-1.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-hiding-1.png"><img alt="Our new homepage with recipes" src="../../figures/tutorial/screenshot-hiding-1.png" style="width: 50%;" /></a>
 <p>Switch back to edit mode and click the hide icon for the dauphinoise potatoes
 recipe:</p>
-<img alt="Hiding a recipe" src="../../figures/tutorial/screenshot-hiding-2.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-hiding-2.png"><img alt="Hiding a recipe" src="../../figures/tutorial/screenshot-hiding-2.png" style="width: 50%;" /></a>
 <p>The recipe appears as slightly faded, which means that it&#8217;s hidden. Now when we
 change to the preview, we see this:</p>
-<img alt="The hidden recipe doesn't appear in the preview" src="../../figures/tutorial/screenshot-hiding-3.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-hiding-3.png"><img alt="The hidden recipe doesn't appear in the preview" src="../../figures/tutorial/screenshot-hiding-3.png" style="width: 50%;" /></a>
 <p>To make these changes live we click &#8220;Publish&#8221; again:</p>
-<img alt="Our hidden page shows up in the list of pages to publish" src="../../figures/tutorial/screenshot-hiding-4.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-hiding-4.png"><img alt="Our hidden page shows up in the list of pages to publish" src="../../figures/tutorial/screenshot-hiding-4.png" style="width: 50%;" /></a>
 <p>We select our recipe for publishing by clicking on the arrow which moves it
 across from the &#8220;Modified&#8221; list to the &#8220;Publish&#8221; list:</p>
-<img alt="Selecting our page for publishing" src="../../figures/tutorial/screenshot-hiding-5.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../../figures/tutorial/screenshot-hiding-5.png"><img alt="Selecting our page for publishing" src="../../figures/tutorial/screenshot-hiding-5.png" style="width: 50%;" /></a>
 <p>And then click &#8220;Publish&#8221;. Our live site <a class="reference external" href="http://127.0.0.1:2012/">http://127.0.0.1:2012/</a> will now look
 like our preview site with the dauphinoise potatoes recipe hidden.</p>
 </div>
@@ -752,7 +784,7 @@ manage images, create aliases and work with CSS &amp; Javascript.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Garry Hill.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

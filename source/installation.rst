@@ -17,7 +17,7 @@ Spontaneous currently requires MRI Ruby >= 1.9.3
 
 Install RVM::
 
-    $ rvm install 1.9.3
+    $ rvm install 2.0.0
 
 
 Installing Spontaneous
@@ -25,7 +25,7 @@ Installing Spontaneous
 
 .. code-block:: bash
 
-    $ gem install spontaneous --prerelease
+    $ gem install spontaneous --prerelease --no-rdoc --no-ri
 
 This installs the Spontaneous library files (and their dependencies) as well as
 the executable ``spot``.
