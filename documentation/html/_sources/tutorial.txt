@@ -268,7 +268,7 @@ fields that each recipe needs (title, description and photo)::
     # schema/recipe.rb
 
     class Recipe < Page
-      field :description, :text
+      field :description, :markdown
       field :photo,       :image
     end
 
@@ -291,7 +291,7 @@ and your site homepage should look something like this:
 If you wanted to use a different name for the field in the user interface, you
 would pass a value for ``title`` in the field options::
 
-    field :description, :text, title: "A short description"
+    field :description, :markdown, title: "A short description"
 
 This would change the name of the field in the user interface to "A short
 description" but the internal name of the field would still be "description".
@@ -301,7 +301,7 @@ description" but the internal name of the field would still be "description".
    :width: 50%
 
 The second parameter to the field definition is the field type. The basic field
-types are ``:string``, ``:text`` and ``:image`` (though there are more see
+types are ``:string``, ``:markdown`` and ``:image`` (though there are more see
 :ref:`schema-field-types`).
 
 **String** fields are basic bits of text without any formatting. They are
@@ -312,10 +312,14 @@ skip the type parameter::
     # defaults to a ``string`` field
     field :name
 
-**Text** fields allow for the entry of rich text. These are useful for body text
-and allow the content editors to style text as bold or italic, add lists of
-items, headers and hyperlinks. The default (and currently only) input mechanism
-is a `Markdown <http://daringfireball.net/projects/markdown/>`_ editor.
+**Markdown** fields allow for the entry of rich text using the `Markdown
+format <http://daringfireball.net/projects/markdown/>`_. These are useful for
+body text and allow the content editors to style text as bold or italic, add
+lists of items, headers and hyperlinks.
+
+Markdown is currently the only supported 'rich' text format. Because of this a
+lot of effort has gone into making the Markdown editing experience as
+comfortable & efficient as possible.
 
 .. note::
   **Why not WSIWYG?** If you've ever stuggled with a browser based `WYSIWYG
@@ -323,9 +327,10 @@ is a `Markdown <http://daringfireball.net/projects/markdown/>`_ editor.
   go to plan. One of the design philosophies of Spontaneous is to allow content
   editors to produce richly styled web-pages without having to struggle with
   layout themselves and without being in danger of breaking the layout of the
-  pages. WYSIWYG editors actually hinder this. Having said that, when browsers'
+  pages. WYSIWYG editors actually hinder this. If and when browsers'
   WYSIWYG implementations improve enough to be reliable and produce safe and
-  uncluttered HTML then we'll think about using them.
+  uncluttered HTML (which doesn't break catastropically when pasting from
+  Microsoft Word...) then they *might* be supported.
 
 **Image** fields allow you to upload images using a drag-and-drop interface.
 Spontaneous has very powerful image manipulation functions built into it which
@@ -354,7 +359,7 @@ So our Recipe page definition could also have been written like this::
     # schema/recipe.rb
 
     class Recipe < Page
-      field :description, :text
+      field :description, :markdown
       field :photo
     end
 
@@ -399,7 +404,7 @@ to something more appropriate::
       # we can drop the type for the `title` field
       # because the default is :string
       field :title,       default: "New Recipe"
-      field :description, :text
+      field :description, :markdown
       field :photo
     end
 
@@ -439,7 +444,7 @@ do this within our ``schema/recipe.rb`` file as before::
       # we can drop the type for the `title` field
       # because the default is :string
       field :title,       default: "New Recipe"
-      field :description, :text
+      field :description, :markdown
       field :photo
 
       box :ingredients do
@@ -476,7 +481,7 @@ instructions:
       # we can drop the type for the `title` field
       # because the default is :string
       field :title,       default: "New Recipe"
-      field :description, :text
+      field :description, :markdown
       field :photo
 
       box :ingredients do
@@ -495,7 +500,7 @@ instructions:
 
     # Step entries are added to the "instructions" box within our Recipe
     class Step < Piece
-      field :instructions, :text
+      field :instructions, :markdown
       field :photo, comment: "Optional"
     end
 

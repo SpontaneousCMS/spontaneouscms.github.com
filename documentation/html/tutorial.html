@@ -233,7 +233,7 @@ fields that each recipe needs (title, description and photo):</p>
 <div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
 <span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
-  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:markdown</span>
   <span class="n">field</span> <span class="ss">:photo</span><span class="p">,</span>       <span class="ss">:image</span>
 <span class="k">end</span>
 </pre></div>
@@ -251,14 +251,14 @@ and your site homepage should look something like this:</p>
 <a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-5.png"><img alt="The new Recipe 'description' and 'photo' fields" src="../../figures/tutorial/screenshot-edit-homepage-5.png" style="width: 50%;" /></a>
 <p>If you wanted to use a different name for the field in the user interface, you
 would pass a value for <tt class="docutils literal"><span class="pre">title</span></tt> in the field options:</p>
-<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;A short description&quot;</span>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:markdown</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;A short description&quot;</span>
 </pre></div>
 </div>
 <p>This would change the name of the field in the user interface to &#8220;A short
 description&#8221; but the internal name of the field would still be &#8220;description&#8221;.</p>
 <a class="reference internal image-reference" href="../../figures/tutorial/screenshot-edit-homepage-6.png"><img alt="Renaming the 'description' field" src="../../figures/tutorial/screenshot-edit-homepage-6.png" style="width: 50%;" /></a>
 <p>The second parameter to the field definition is the field type. The basic field
-types are <tt class="docutils literal"><span class="pre">:string</span></tt>, <tt class="docutils literal"><span class="pre">:text</span></tt> and <tt class="docutils literal"><span class="pre">:image</span></tt> (though there are more see
+types are <tt class="docutils literal"><span class="pre">:string</span></tt>, <tt class="docutils literal"><span class="pre">:markdown</span></tt> and <tt class="docutils literal"><span class="pre">:image</span></tt> (though there are more see
 <a class="reference internal" href="schema/fields.html#schema-field-types"><em>Field Types</em></a>).</p>
 <p><strong>String</strong> fields are basic bits of text without any formatting. They are
 useful for titles and any other bit of text that you want to appear as unstyled.
@@ -268,19 +268,23 @@ skip the type parameter:</p>
 <span class="n">field</span> <span class="ss">:name</span>
 </pre></div>
 </div>
-<p><strong>Text</strong> fields allow for the entry of rich text. These are useful for body text
-and allow the content editors to style text as bold or italic, add lists of
-items, headers and hyperlinks. The default (and currently only) input mechanism
-is a <a class="reference external" href="http://daringfireball.net/projects/markdown/">Markdown</a> editor.</p>
+<p><strong>Markdown</strong> fields allow for the entry of rich text using the <a class="reference external" href="http://daringfireball.net/projects/markdown/">Markdown
+format</a>. These are useful for
+body text and allow the content editors to style text as bold or italic, add
+lists of items, headers and hyperlinks.</p>
+<p>Markdown is currently the only supported &#8216;rich&#8217; text format. Because of this a
+lot of effort has gone into making the Markdown editing experience as
+comfortable &amp; efficient as possible.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>Why not WSIWYG?</strong> If you&#8217;ve ever stuggled with a browser based <a class="reference external" href="http://en.wikipedia.org/wiki/WYSIWYG">WYSIWYG</a> you&#8217;ll know that things don&#8217;t always
 go to plan. One of the design philosophies of Spontaneous is to allow content
 editors to produce richly styled web-pages without having to struggle with
 layout themselves and without being in danger of breaking the layout of the
-pages. WYSIWYG editors actually hinder this. Having said that, when browsers&#8217;
+pages. WYSIWYG editors actually hinder this. If and when browsers&#8217;
 WYSIWYG implementations improve enough to be reliable and produce safe and
-uncluttered HTML then we&#8217;ll think about using them.</p>
+uncluttered HTML (which doesn&#8217;t break catastropically when pasting from
+Microsoft Word...) then they <em>might</em> be supported.</p>
 </div>
 <p><strong>Image</strong> fields allow you to upload images using a drag-and-drop interface.
 Spontaneous has very powerful image manipulation functions built into it which
@@ -307,7 +311,7 @@ referred to as <tt class="docutils literal"><span class="pre">photo</span></tt> 
 <div class="highlight-ruby"><div class="highlight"><pre><span class="c1"># schema/recipe.rb</span>
 
 <span class="k">class</span> <span class="nc">Recipe</span> <span class="o">&lt;</span> <span class="no">Page</span>
-  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:markdown</span>
   <span class="n">field</span> <span class="ss">:photo</span>
 <span class="k">end</span>
 </pre></div>
@@ -349,7 +353,7 @@ to something more appropriate:</p>
   <span class="c1"># we can drop the type for the `title` field</span>
   <span class="c1"># because the default is :string</span>
   <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="ss">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
-  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:markdown</span>
   <span class="n">field</span> <span class="ss">:photo</span>
 <span class="k">end</span>
 </pre></div>
@@ -382,7 +386,7 @@ do this within our <tt class="docutils literal"><span class="pre">schema/recipe.
   <span class="c1"># we can drop the type for the `title` field</span>
   <span class="c1"># because the default is :string</span>
   <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="ss">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
-  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:markdown</span>
   <span class="n">field</span> <span class="ss">:photo</span>
 
   <span class="n">box</span> <span class="ss">:ingredients</span> <span class="k">do</span>
@@ -415,7 +419,7 @@ instructions:</p>
   <span class="c1"># we can drop the type for the `title` field</span>
   <span class="c1"># because the default is :string</span>
   <span class="n">field</span> <span class="ss">:title</span><span class="p">,</span>       <span class="ss">default</span><span class="p">:</span> <span class="s2">&quot;New Recipe&quot;</span>
-  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:markdown</span>
   <span class="n">field</span> <span class="ss">:photo</span>
 
   <span class="n">box</span> <span class="ss">:ingredients</span> <span class="k">do</span>
@@ -434,7 +438,7 @@ instructions:</p>
 
 <span class="c1"># Step entries are added to the &quot;instructions&quot; box within our Recipe</span>
 <span class="k">class</span> <span class="nc">Step</span> <span class="o">&lt;</span> <span class="no">Piece</span>
-  <span class="n">field</span> <span class="ss">:instructions</span><span class="p">,</span> <span class="ss">:text</span>
+  <span class="n">field</span> <span class="ss">:instructions</span><span class="p">,</span> <span class="ss">:markdown</span>
   <span class="n">field</span> <span class="ss">:photo</span><span class="p">,</span> <span class="ss">comment</span><span class="p">:</span> <span class="s2">&quot;Optional&quot;</span>
 <span class="k">end</span>
 </pre></div>
