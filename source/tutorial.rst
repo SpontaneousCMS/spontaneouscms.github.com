@@ -625,7 +625,8 @@ Create HTML Templates
 ---------------------
 
 Now that we've finished editing let's see how our site will look like to
-visitors:
+visitors. If you click on the 'Prevew' button then you should see something
+like this:
 
 
 .. image:: ../../figures/tutorial/screenshot-template-1.png
