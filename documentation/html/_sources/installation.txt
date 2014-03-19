@@ -51,6 +51,20 @@ to install either of these.
 
 .. _installation-troubleshooting:
 
+Installing ImageMagick
+----------------------
+
+Image fields can specify any number of generated 'sizes' with specific postprocessing
+steps such as resizing, cropping, colour conversions overlays etc. This image
+manipulation is done using ImageMagick so you'll need to install it before continuing.
+
+On Mac OS X this is easiest using Homebrew:
+
+.. code-block:: bash
+
+    $ brew install imagemagick
+
+
 Troubleshooting
 ---------------
 
